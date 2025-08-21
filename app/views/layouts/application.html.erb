@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-200">
+<html class="h-full bg-zinc-300">
   <head>
     <title><%= content_for(:title) || "Expensary" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,6 +17,9 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%# Inter font %>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -28,7 +31,7 @@
         <el-dialog-backdrop class="fixed inset-0 bg-zinc-800/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
 
         <div tabindex="0" class="fixed inset-0 flex focus:outline-none">
-          <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
+          <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-64 flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
             <div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
               <button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5">
                 <span class="sr-only">Close sidebar</span>
@@ -95,9 +98,9 @@
     </el-dialog>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden bg-zinc-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+    <div class="hidden bg-zinc-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
+      <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6">
         <div class="flex h-16 shrink-0 items-center font-bold text-xl text-emerald-600 tracking-wide">
           <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
           <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
@@ -109,37 +112,37 @@
               <ul role="list" class="-mx-2 space-y-1">
                 <li>
                   <!-- Current: "bg-white/5 text-white", Default: "text-gray-400 hover:text-white hover:bg-white/5" -->
-                  <a href="#" class="group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 font-semibold text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white">
                     <%= heroicon "building-library", class: "size-6 shrink-0" %>
                     Dashboard
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
                     Accounts
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                     Transactions
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                     Cash Flow
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "tag", class: "size-6 shrink-0" %>
                     Categories
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                     Reports
                   </a>
