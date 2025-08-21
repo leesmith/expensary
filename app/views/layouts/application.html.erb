@@ -25,7 +25,7 @@
   <body class="h-full">
     <el-dialog>
       <dialog id="sidebar" class="backdrop:bg-transparent lg:hidden">
-        <el-dialog-backdrop class="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
+        <el-dialog-backdrop class="fixed inset-0 bg-zinc-800/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
 
         <div tabindex="0" class="fixed inset-0 flex focus:outline-none">
           <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
@@ -37,9 +37,11 @@
             </div>
 
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
-              <div class="relative flex h-16 shrink-0 items-center">
-                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" />
+            <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-zinc-800 px-6 pb-2 ring-1 ring-white/10">
+              <div class="relative flex h-16 shrink-0 items-center font-bold text-xl text-emerald-600 tracking-wide">
+                <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
+                <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
+                Expensary
               </div>
               <nav class="flex flex-1 flex-col">
                 <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -53,31 +55,31 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
                           Accounts
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                           Transactions
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                           Cash Flow
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "tag", class: "size-6 shrink-0" %>
                           Categories
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                           Reports
                         </a>
@@ -93,11 +95,13 @@
     </el-dialog>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden bg-gray-900 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+    <div class="hidden bg-zinc-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
-        <div class="flex h-16 shrink-0 items-center">
-          <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" />
+        <div class="flex h-16 shrink-0 items-center font-bold text-xl text-emerald-600 tracking-wide">
+          <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
+          <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
+          Expensary
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -111,31 +115,31 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
                     Accounts
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                     Transactions
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                     Cash Flow
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "tag", class: "size-6 shrink-0" %>
                     Categories
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                     Reports
                   </a>
@@ -154,7 +158,7 @@
       </div>
     </div>
 
-    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-zinc-800 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
       <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-gray-400 hover:text-white lg:hidden">
         <span class="sr-only">Open sidebar</span>
         <%= heroicon "bars-3", class: "size-6", data: { "slot" => "icon" } %>
