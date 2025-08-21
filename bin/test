@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+FileUtils.chdir APP_ROOT do
+  # This script handles setting up the test database and running the full test suite
+
+  puts "== Resetting test database =="
+  system! "bin/rails RAILS_ENV=test db:reset"
+
+  puts "\n== Running test suite =="
+  system! "bin/rails test && bin/rails test:system"
+end

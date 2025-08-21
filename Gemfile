@@ -19,6 +19,8 @@ group :development, :test do
   gem "amazing_print"
   gem "brakeman", require: false
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "factory_bot_rails"
+  gem "faker"
   gem "rubocop-rails-omakase", require: false
 end
 
@@ -28,5 +30,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "shoulda-context"
+  gem "shoulda-matchers"
   gem "selenium-webdriver"
 end

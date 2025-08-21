@@ -105,6 +105,13 @@ GEM
     drb (2.2.3)
     erb (5.0.2)
     erubi (1.13.1)
+    factory_bot (6.5.5)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.0)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -261,7 +268,7 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
-    rubyzip (3.0.1)
+    rubyzip (3.0.2)
     securerandom (0.4.1)
     selenium-webdriver (4.35.0)
       base64 (~> 0.2)
@@ -269,6 +276,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    shoulda-context (2.0.0)
+    shoulda-matchers (6.5.0)
+      activesupport (>= 5.2.0)
     sqlite3 (2.7.3-aarch64-linux-gnu)
     sqlite3 (2.7.3-aarch64-linux-musl)
     sqlite3 (2.7.3-arm-linux-gnu)
@@ -335,6 +345,8 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  factory_bot_rails
+  faker
   importmap-rails
   jbuilder
   propshaft
@@ -343,6 +355,8 @@ DEPENDENCIES
   rails_heroicon
   rubocop-rails-omakase
   selenium-webdriver
+  shoulda-context
+  shoulda-matchers
   sqlite3
   stimulus-rails
   tailwindcss-rails
