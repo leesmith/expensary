@@ -41,7 +41,7 @@
 
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-zinc-800 px-6 pb-2 ring-1 ring-white/10">
-              <div class="relative flex h-16 shrink-0 items-center font-bold font-serif text-xl text-emerald-600 tracking-wide">
+              <div class="relative flex h-16 shrink-0 items-center font-semibold font-serif text-xl text-emerald-600 tracking-wide">
                 <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
                 <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
                 Expensary
@@ -52,37 +52,51 @@
                     <ul role="list" class="-mx-2 space-y-1">
                       <li>
                         <!-- Current: "bg-white/5 text-white", Default: "text-zinc-400 hover:text-white hover:bg-white/5" -->
-                        <a href="#" class="group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 font-semibold text-white">
-                          <%= heroicon "building-library", class: "size-6 shrink-0" %>
-                          Dashboard
-                        </a>
+                        <% if request.controller_class.ancestors.include? DashboardController %>
+                          <%= link_to root_path, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                            <%= heroicon "building-library", class: "size-6 shrink-0" %>
+                            Dashboard
+                          <% end %>
+                        <% else %>
+                          <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                            <%= heroicon "building-library", class: "size-6 shrink-0" %>
+                            Dashboard
+                          <% end %>
+                        <% end %>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
-                          <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
-                          Accounts
-                        </a>
+                        <% if request.controller_class.ancestors.include? AccountsController %>
+                          <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                            <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
+                            Accounts
+                          <% end %>
+                        <% else %>
+                          <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                            <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
+                            Accounts
+                          <% end %>
+                        <% end %>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                           Transactions
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                           Cash Flow
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "tag", class: "size-6 shrink-0" %>
                           Categories
                         </a>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                           Reports
                         </a>
@@ -101,7 +115,7 @@
     <div class="hidden bg-zinc-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6">
-        <div class="flex h-16 shrink-0 items-center font-bold font-serif text-xl text-emerald-600 tracking-wide">
+        <div class="flex h-16 shrink-0 items-center font-semibold font-serif text-xl text-emerald-600 tracking-wide">
           <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
           <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
           Expensary
@@ -112,16 +126,30 @@
               <ul role="list" class="-mx-2 space-y-1">
                 <li>
                   <!-- Current: "bg-white/5 text-white", Default: "text-zinc-400 hover:text-white hover:bg-white/5" -->
-                  <a href="#" class="group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white">
-                    <%= heroicon "building-library", class: "size-6 shrink-0" %>
-                    Dashboard
-                  </a>
+                  <% if request.controller_class.ancestors.include? DashboardController %>
+                    <%= link_to root_path, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                      <%= heroicon "building-library", class: "size-6 shrink-0" %>
+                      Dashboard
+                    <% end %>
+                  <% else %>
+                    <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                      <%= heroicon "building-library", class: "size-6 shrink-0" %>
+                      Dashboard
+                    <% end %>
+                  <% end %>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
-                    <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
-                    Accounts
-                  </a>
+                  <% if request.controller_class.ancestors.include? AccountsController %>
+                    <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                      <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
+                      Accounts
+                    <% end %>
+                  <% else %>
+                    <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                      <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
+                      Accounts
+                    <% end %>
+                  <% end %>
                 </li>
                 <li>
                   <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
