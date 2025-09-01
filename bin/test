@@ -14,5 +14,5 @@ FileUtils.chdir APP_ROOT do
   system! "bin/rails RAILS_ENV=test db:reset"
 
   puts "\n== Running test suite =="
-  system! "bin/rails test && bin/rails test:system"
+  system! "bin/rails test:all"
 end
