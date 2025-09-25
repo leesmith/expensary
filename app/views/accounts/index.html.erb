@@ -1,0 +1,61 @@
+<div class="lg:flex lg:gap-8">
+  <div class="lg:w-2/3">
+    <% if @accounts.any? %>
+      <%= render "shared/card", class: "mb-5 p-4 divide-y divide-zinc-200" do %>
+        <table class="min-w-full divide-y divide-zinc-300">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-zinc-900 sm:pl-6">Name</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-200 bg-white">
+            <% @accounts.each_with_index do |account, i| %>
+              <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6 text-sm text-zinc-900"><%= account.name %></td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-900"><%= link_to "Delete", "#", class: "text-red-700", data: { turbo_method: :delete, turbo_confirm: "Really delete this account?" } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <div class="p-6 rounded-lg border-2 border-dashed border-zinc-300 text-center">
+        <h3 class="mt-2 text-sm font-semibold text-zinc-900">Add your accounts</h3>
+        <p class="mt-1 text-sm text-zinc-500">Add your liability and asset accounts in order to load transactions.</p>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render "shared/card", class: "lg:w-1/3 divide-y divide-zinc-200 p-4 mt-4 lg:mt-0" do %>
+    <p class="pb-2 border-b border-zinc-300 font-medium text-zinc-600">Add Account</p>
+    <%= form_with model: Account.new, url: accounts_path, method: :post, class: "my-4 space-y-4" do |f| %>
+      <div class="mt-2">
+        <%= f.label :name, class: "form-label mr-2" %>
+        <div class="mt-1">
+          <%= f.text_field :name, required: true, class: "text-field" %>
+        </div>
+      </div>
+      <div class="mt-2">
+        <%= f.label :description, class: "form-label mr-2" %>
+        <div class="mt-1">
+          <%= f.text_field :description, class: "text-field" %>
+        </div>
+      </div>
+      <fieldset>
+        <legend class="text-sm/6 font-semibold text-gray-900">Account Type</legend>
+        <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+          <% Account.account_types.each do |account_type| %>
+            <div class="flex items-center">
+              <%= f.radio_button :account_type, account_type.first, class: "relative size-4 appearance-none rounded-full border border-zinc-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-zinc-300 disabled:bg-zinc-100 disabled:before:bg-zinc-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
+              <label class="form-label ml-3" for="account_account_type_<%= account_type.first %>"><%= account_type.first.titleize %></label>
+            </div>
+          <% end %>
+        </div>
+      </fieldset>
+      <div class="flex justify-end">
+        <%= f.submit "Add", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

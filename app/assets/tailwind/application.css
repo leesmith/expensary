@@ -6,3 +6,89 @@
   --font-sans: InterVariable, sans-serif;
   --font-sans--font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
+
+@utility outliner {
+  /* development outline helper */
+  @apply outline outline-1 outline-red-600;
+}
+
+@utility btn {
+  /* button appearance */
+  @apply border
+      duration-300
+      focus:outline-hidden
+      focus:ring-2
+      focus:ring-offset-2
+      font-medium
+      gap-2
+      hover:cursor-pointer
+      inline-flex
+      items-center
+      justify-center
+      px-4
+      py-2
+      rounded-md
+      shadow-xs
+      text-sm
+      transition-colors;
+}
+
+@utility btn-primary {
+  @apply btn
+      bg-sky-600
+      border-transparent
+      focus:ring-sky-500
+      hover:bg-sky-700
+      text-white;
+}
+
+@utility btn-secondary {
+  @apply btn
+      bg-white
+      border-gray-300
+      focus:ring-1
+      focus:ring-gray-300
+      hover:bg-gray-50
+      text-gray-500;
+}
+
+@utility link-primary {
+  /* link appearance */
+  @apply transition-colors duration-300 text-sky-600 hover:text-sky-500 hover:underline hover:underline-offset-4;
+}
+
+@utility form-label {
+  /* form field appearance */
+  @apply block text-sm font-medium text-gray-900 hover:cursor-pointer;
+}
+
+@utility file-field {
+  @apply file:bg-white
+      file:border
+      file:border-solid
+      file:border-gray-300
+      file:focus:outline-hidden
+      file:focus:ring-1
+      file:focus:ring-gray-300
+      file:focus:ring-offset-2
+      file:font-medium
+      file:hover:bg-gray-50
+      file:mr-4
+      file:px-4
+      file:py-2
+      file:rounded-md
+      file:shadow-xs
+      file:text-sm
+      file:text-gray-500
+      file:transition-colors
+      hover:cursor-pointer
+      text-sm;
+}
+
+@utility text-field {
+  @apply block w-full rounded-md border border-gray-300 shadow-xs placeholder:text-gray-400 focus:border-sky-500 focus:ring-3 focus:ring-sky-50 focus:ring-black/50 sm:text-sm;
+}
+
+@utility check-box {
+  @apply h-4 w-4 rounded-sm border-gray-300 text-sky-600 focus:ring-sky-600;
+}
