@@ -45,11 +45,11 @@
 @utility btn-secondary {
   @apply btn
       bg-white
-      border-gray-300
+      border-zinc-300
       focus:ring-1
-      focus:ring-gray-300
-      hover:bg-gray-50
-      text-gray-500;
+      focus:ring-zinc-300
+      hover:bg-zinc-50
+      text-zinc-500;
 }
 
 @utility link-primary {
@@ -59,36 +59,36 @@
 
 @utility form-label {
   /* form field appearance */
-  @apply block text-sm font-medium text-gray-900 hover:cursor-pointer;
+  @apply block text-sm font-medium text-zinc-900 hover:cursor-pointer;
 }
 
 @utility file-field {
   @apply file:bg-white
       file:border
       file:border-solid
-      file:border-gray-300
+      file:border-zinc-300
       file:focus:outline-hidden
       file:focus:ring-1
-      file:focus:ring-gray-300
+      file:focus:ring-zinc-300
       file:focus:ring-offset-2
       file:font-medium
-      file:hover:bg-gray-50
+      file:hover:bg-zinc-50
       file:mr-4
       file:px-4
       file:py-2
       file:rounded-md
       file:shadow-xs
       file:text-sm
-      file:text-gray-500
+      file:text-zinc-500
       file:transition-colors
       hover:cursor-pointer
       text-sm;
 }
 
 @utility text-field {
-  @apply block w-full rounded-md border border-gray-300 shadow-xs placeholder:text-gray-400 focus:border-sky-500 focus:ring-3 focus:ring-sky-50 focus:ring-black/50 sm:text-sm;
+  @apply block w-full rounded-md border border-gray-300 shadow-xs placeholder:text-zinc-400 focus:border-sky-500 focus:ring-3 focus:ring-sky-50 focus:ring-black/50 sm:text-sm;
 }
 
 @utility check-box {
-  @apply h-4 w-4 rounded-sm border-gray-300 text-sky-600 focus:ring-sky-600;
+  @apply h-4 w-4 rounded-sm border-zinc-300 text-sky-600 focus:ring-sky-600;
 }
