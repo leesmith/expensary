@@ -60,7 +60,7 @@ namespace :import do
 
       unless row[7] == "PAYMENT - THANK YOU"
         if row[5].present?
-          amount = row[5].gsub("-","")
+          amount = row[5].gsub("-", "")
           tran_type = "debit"
         else
           amount = row[6]
@@ -92,7 +92,7 @@ namespace :import do
       # "CHECKING * 6861","08/16/2024","08/16/2024","","EB To Savings 9792","-20.0000","","EB TO SAVINGS # xxxxxx9792 REF# 000000 8643451"
 
       if row[5].present?
-        amount = row[5].gsub("-","")
+        amount = row[5].gsub("-", "")
         tran_type = "debit"
       else
         amount = row[6]
