@@ -9,7 +9,7 @@ namespace :import do
       # Transaction Date,Clearing Date,Description,Merchant,Category,Type,Amount (USD),Purchased By
       # 04/08/2024,04/08/2024,"PUBLIX #842","Publix","Grocery","Purchase","39.34","Jeremy Smith"
 
-      unless (row[4] == "Payment" && row[5] == "Payment")
+      unless row[4] == "Payment" && row[5] == "Payment"
         tran_type = row[5].downcase
         tran_type = "debit" if row[5] == "Purchase"
 
