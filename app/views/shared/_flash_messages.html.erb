@@ -1,0 +1,62 @@
+<% if notice.present? || success.present? %>
+  <div data-controller="visibility"
+       class="rounded-md bg-green-50 border border-green-400 p-4 mb-5"
+       data-visibility-target="hideable"
+       data-transition-leave="transition ease-in duration-300"
+       data-transition-leave-start="transform opacity-100"
+       data-transition-leave-end="transform opacity-0">
+    <div class="flex">
+      <div class="shrink-0">
+        <%= heroicon "check-circle", class: "text-green-400", size: 20, variant: :solid %>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm text-green-700">
+          <%= notice if notice.present? %>
+          <%= success if success.present? %>
+        </p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button type="button"
+                  class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-hidden focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
+                  data-action="visibility#hideTargets">
+            <span class="sr-only">Dismiss</span>
+            <%= heroicon "x-mark", variant: :mini %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if alert.present? || error.present? %>
+  <div data-controller="visibility"
+       class="rounded-md bg-red-50 border border-red-400 p-4 mb-5"
+       data-visibility-target="hideable"
+       data-transition-leave="transition ease-in duration-300"
+       data-transition-leave-start="transform opacity-100"
+       data-transition-leave-end="transform opacity-0">
+
+    <div class="flex">
+      <div class="shrink-0">
+        <%= heroicon "x-circle", class: "text-red-400", size: 20, variant: :solid %>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm text-red-700">
+          <%= alert if alert.present? %>
+          <%= error if error.present? %>
+        </p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button type="button"
+                  class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-hidden focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
+                  data-action="visibility#hideTargets">
+            <span class="sr-only">Dismiss</span>
+            <%= heroicon "x-mark", variant: :mini %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
