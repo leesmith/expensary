@@ -11,3 +11,4 @@ pin "mini-svg-data-uri" # @1.4.4
 pin "tailwindcss/colors", to: "tailwindcss--colors.js" # @4.1.12
 pin "tailwindcss/defaultTheme", to: "tailwindcss--defaultTheme.js" # @4.1.12
 pin "tailwindcss/plugin", to: "tailwindcss--plugin.js" # @4.1.12
+pin "el-transition" # @0.0.7

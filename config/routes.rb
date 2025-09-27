@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   resources :accounts, except: [:show, :destroy]
 
   # Transactions
-  resources :transactions, only: [:index]
+  resources :transactions, only: [:index, :destroy]
 end
