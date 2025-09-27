@@ -1,4 +1,32 @@
 namespace :import do
+  desc "Bulk load Apple credit card transactions"
+  task :apple, [ :filepath ] => :environment do |t, args|
+    filepath = args[:filepath]
+    account = Account.find_by(name: "Apple Card")
+    trans = []
+
+    CSV.foreach(filepath, headers: true) do |row|
+      # Transaction Date,Clearing Date,Description,Merchant,Category,Type,Amount (USD),Purchased By
+      # 04/08/2024,04/08/2024,"PUBLIX #842","Publix","Grocery","Purchase","39.34","Jeremy Smith"
+
+      unless (row[4] == "Payment" && row[5] == "Payment")
+        tran_type = row[5].downcase
+        tran_type = "debit" if row[5] == "Purchase"
+
+        trans << ({
+          account_id: account.id,
+          tran_date: Date.strptime(row[0], "%m/%d/%Y"),
+          description: row[3],
+          amount: row[6].gsub("-", ""),
+          tran_type: tran_type
+        })
+      end
+    end
+
+    Transaction.insert_all(trans)
+    puts "::::::::: Added #{trans.size} transactions!"
+  end
+
   desc "Bulk load Amex credit card transactions"
   task :delta_amex, [ :filepath ] => :environment do |t, args|
     filepath = args[:filepath]
