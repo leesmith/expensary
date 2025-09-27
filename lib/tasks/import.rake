@@ -80,4 +80,35 @@ namespace :import do
     Transaction.insert_all(trans)
     puts "::::::::: Added #{trans.size} transactions!"
   end
+
+  desc "Bulk load Regions checking transactions"
+  task :regions_checking, [ :filepath ] => :environment do |t, args|
+    filepath = args[:filepath]
+    account = Account.find_by(name: "Regions Checking")
+    trans = []
+
+    CSV.foreach(filepath, headers: true) do |row|
+      # "Account","Transaction Date","Posted Date","No.","Description","Debit","Credit","Long Description"
+      # "CHECKING * 6861","08/16/2024","08/16/2024","","EB To Savings 9792","-20.0000","","EB TO SAVINGS # xxxxxx9792 REF# 000000 8643451"
+
+      if row[5].present?
+        amount = row[5].gsub("-","")
+        tran_type = "debit"
+      else
+        amount = row[6]
+        tran_type = "credit"
+      end
+
+      trans << ({
+        account_id: account.id,
+        tran_date: Date.strptime(row[1], "%m/%d/%Y"),
+        description: row[4],
+        amount: amount,
+        tran_type: tran_type
+      })
+    end
+
+    Transaction.insert_all(trans)
+    puts "::::::::: Added #{trans.size} transactions!"
+  end
 end
