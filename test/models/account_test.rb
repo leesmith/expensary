@@ -14,6 +14,10 @@ class AccountTest < ActiveSupport::TestCase
     should define_enum_for :account_type
   end
 
+  context "associations" do
+    should have_many(:transactions).dependent(:destroy)
+  end
+
   context "db indexes" do
     should have_db_index :account_type
   end
