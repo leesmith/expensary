@@ -4,9 +4,11 @@ class CreateTransactions < ActiveRecord::Migration[8.0]
       t.references :account, null: false, foreign_key: true
       t.text :description, null: false
       t.date :tran_date, null: false
+      t.integer :tran_type, null: false, default: 0
       t.decimal :amount, precision: 12, scale: 2, null: false
       t.timestamps
     end
     add_index :transactions, :tran_date
+    add_index :transactions, :tran_type
   end
 end

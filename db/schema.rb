@@ -25,11 +25,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_27_023950) do
     t.integer "account_id", null: false
     t.text "description", null: false
     t.date "tran_date", null: false
+    t.integer "tran_type", default: 0, null: false
     t.decimal "amount", precision: 12, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["tran_date"], name: "index_transactions_on_tran_date"
+    t.index ["tran_type"], name: "index_transactions_on_tran_type"
   end
 
   add_foreign_key "transactions", "accounts"
