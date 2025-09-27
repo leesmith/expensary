@@ -9,12 +9,17 @@ namespace :import do
       # Date,Description,Card Member,Account #,Amount
       # 07/02/2025,WAL-MART,JEREMY LEE SMITH,-01002,30.45
       unless row[1] == "MOBILE PAYMENT - THANK YOU"
-        trans << ({ account_id: account.id, tran_date: Date.strptime(row[0], "%m/%d/%Y"), description: row[1], amount: row[4].gsub("-", ""), tran_type: row[4].to_d < 0 ? "credit" : "debit" })
+        trans << ({
+          account_id: account.id,
+          tran_date: Date.strptime(row[0], "%m/%d/%Y"),
+          description: row[1],
+          amount: row[4].gsub("-", ""),
+          tran_type: row[4].to_d < 0 ? "credit" : "debit"
+        })
       end
     end
 
     Transaction.insert_all(trans)
-
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -29,12 +34,50 @@ namespace :import do
       # 08/24/2023,08/25/2023,MOUNTAIN BROOK HIGH SC,Education,Sale,-13.00,
 
       unless row[4] == "Payment"
-        trans << ({ account_id: account.id, tran_date: Date.strptime(row[0], "%m/%d/%Y"), description: row[2], amount: row[5].gsub("-", ""), tran_type: row[5].to_d < 0 ? "debit" : "credit" })
+        trans << ({
+          account_id: account.id,
+          tran_date: Date.strptime(row[0], "%m/%d/%Y"),
+          description: row[2],
+          amount: row[5].gsub("-", ""),
+          tran_type: row[5].to_d < 0 ? "debit" : "credit"
+        })
       end
     end
 
     Transaction.insert_all(trans)
+    puts "::::::::: Added #{trans.size} transactions!"
+  end
 
+  desc "Bulk load Regions Visa credit card transactions"
+  task :regions_visa, [ :filepath ] => :environment do |t, args|
+    filepath = args[:filepath]
+    account = Account.find_by(name: "Regions Visa")
+    trans = []
+
+    CSV.foreach(filepath, headers: true) do |row|
+      # "Account","Transaction Date","Posted Date","No.","Description","Debit","Credit","Long Description"
+      # "CASH REWARDS VISA SIGNATURE * 6819","08/15/2024","08/19/2024","*6819","Southwest Airlines","-554.9300","","SOUTHWES xxxxxxxx62291"
+
+      unless row[7] == "PAYMENT - THANK YOU"
+        if row[5].present?
+          amount = row[5].gsub("-","")
+          tran_type = "debit"
+        else
+          amount = row[6]
+          tran_type = "credit"
+        end
+
+        trans << ({
+          account_id: account.id,
+          tran_date: Date.strptime(row[1], "%m/%d/%Y"),
+          description: row[4],
+          amount: amount,
+          tran_type: tran_type
+        })
+      end
+    end
+
+    Transaction.insert_all(trans)
     puts "::::::::: Added #{trans.size} transactions!"
   end
 end
