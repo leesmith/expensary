@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   def index
-    @accounts = Account.order(:name)
+    @accounts = Account.order(:account_type, :name)
   end
 
   def create
