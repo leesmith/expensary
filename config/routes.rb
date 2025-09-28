@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   root "dashboard#index"
 
   # Accounts
-  resources :accounts, except: [:show, :destroy]
+  resources :accounts, except: [:destroy] do
+    resources :transactions, only: [:destroy], module: "accounts"
+  end
 
   # Transactions
   resources :transactions, only: [:index, :destroy]
