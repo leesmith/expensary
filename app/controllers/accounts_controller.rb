@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @transactions = @account.transactions.order(tran_date: :desc)
+    @pagy, @transactions = pagy(@transactions, limit: 50)
   end
 
   def create
