@@ -3,6 +3,11 @@ class AccountsController < ApplicationController
     @accounts = Account.order(:account_type, :name)
   end
 
+  def show
+    @account = Account.find(params[:id])
+    @transactions = @account.transactions.order(tran_date: :desc)
+  end
+
   def create
     account = Account.new(account_params)
     if account.save
