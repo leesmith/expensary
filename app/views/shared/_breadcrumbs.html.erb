@@ -1,0 +1,23 @@
+<%# locals: (current: nil, links: nil) -%>
+<nav class="flex mb-4 py-2" aria-label="Breadcrumb">
+  <ol class="flex items-center space-x-4" role="list">
+    <% local_assigns[:links]&.each_with_index do |(content, url), i| %>
+      <li>
+        <div class="flex items-center space-x-4">
+          <%= link_to content, url, class: "text-lg link-primary" %>
+        </div>
+      </li>
+    <% end %>
+
+    <% if local_assigns[:current].present? %>
+      <li>
+        <div class="flex items-center gap-4">
+          <% if local_assigns[:links].present? || local_assigns[:context].present? %>
+            <%= heroicon "slash", class: "text-zinc-400", variant: :mini %>
+          <% end %>
+          <span aria-current="page" class="text-lg text-zinc-500"><%= local_assigns[:current] %></a>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</nav>
