@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.includes(:account).order(tran_date: :desc)
+    @transactions = Transaction.includes(:account, :category).order(tran_date: :desc)
     @pagy, @transactions = pagy(@transactions, limit: 50)
   end
 

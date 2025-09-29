@@ -11,10 +11,12 @@ class TransactionTest < ActiveSupport::TestCase
 
   context "associations" do
     should belong_to(:account)
+    should belong_to(:category).optional(true)
   end
 
   context "db indexes" do
     should have_db_index :account_id
     should have_db_index :tran_date
+    should have_db_index :category_id
   end
 end
