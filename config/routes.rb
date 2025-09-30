@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   # Transactions
   resources :transactions, only: [:index, :destroy]
+
+  # Categories
+  resources :categories, except: [:show, :new]
 end
