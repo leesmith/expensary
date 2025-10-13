@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   end
 
   # Transactions
-  resources :transactions, only: [:index, :destroy]
+  resources :transactions, only: [:index, :update, :destroy] do
+    get "edit_inline_category", on: :member
+  end
 
   # Categories
   resources :categories, except: [:show, :new]
