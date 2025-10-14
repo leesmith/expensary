@@ -24,6 +24,7 @@ class TransactionsController < ApplicationController
   end
 
   def edit_inline_category
+    @categories = Category.order(:group_title, :title)
     @transaction = Transaction.find(params.expect(:id))
     @page = params[:page]
   end
