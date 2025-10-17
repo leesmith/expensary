@@ -7,3 +7,32 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Category.find_or_create_by!(group_title: "Income", title: "Paycheck")
+Category.find_or_create_by!(group_title: "Income", title: "Interest")
+Category.find_or_create_by!(group_title: "Income", title: "Credit Card Rewards")
+
+Category.find_or_create_by!(group_title: "Bills", title: "Power")
+Category.find_or_create_by!(group_title: "Bills", title: "Phone")
+Category.find_or_create_by!(group_title: "Bills", title: "Water")
+Category.find_or_create_by!(group_title: "Bills", title: "Gas")
+Category.find_or_create_by!(group_title: "Bills", title: "Internet")
+Category.find_or_create_by!(group_title: "Bills", title: "Television")
+
+Category.find_or_create_by!(group_title: "Descretionary", title: "Restaurants")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Fast Food")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Subscriptions")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Shopping")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Entertainment")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Gifts")
+Category.find_or_create_by!(group_title: "Descretionary", title: "Charity")
+
+Category.find_or_create_by!(group_title: "Living", title: "Groceries")
+Category.find_or_create_by!(group_title: "Living", title: "Auto Insurance")
+Category.find_or_create_by!(group_title: "Living", title: "Health Insurance")
+Category.find_or_create_by!(group_title: "Living", title: "Life Insurance")
+Category.find_or_create_by!(group_title: "Living", title: "Fuel")
+Category.find_or_create_by!(group_title: "Living", title: "Auto Maintenance")
+Category.find_or_create_by!(group_title: "Living", title: "Mortgage")
+Category.find_or_create_by!(group_title: "Living", title: "Doctor")
+Category.find_or_create_by!(group_title: "Living", title: "Pets")
