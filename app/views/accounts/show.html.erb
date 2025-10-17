@@ -25,6 +25,85 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-zinc-200 bg-white">
+            <tr>
+              <td colspan="6">
+                <div class="flex justify-end align-center p-2">
+                  <button command="show-modal" commandfor="new-transaction" class="btn-primary">Add Transaction</button>
+                </div>
+                <el-dialog>
+                  <dialog id="new-transaction" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+                    <el-dialog-backdrop class="absolute inset-0 bg-zinc-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
+                    <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
+                      <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
+                        <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
+                          <div class="px-4 sm:px-6">
+                            <div class="flex items-start justify-between">
+                              <h2 id="drawer-title" class="text-base font-semibold text-zinc-900">Add Transaction</h2>
+                              <div class="ml-3 flex h-7 items-center">
+                                <button type="button" command="close" commandfor="new-transaction" class="relative p-1 rounded-md text-zinc-400 hover:text-zinc-500 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                                  <span class="absolute -inset-2.5"></span>
+                                  <span class="sr-only">Close panel</span>
+                                  <%= heroicon "x-mark", class: "size-6" %>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                            <div>
+                              <%= form_with(url: account_transactions_url(@account), scope: :transaction) do |form| %>
+                                <div class="space-y-8">
+                                  <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4">
+                                    <div>
+                                      <%= form.label :tran_date, "Transaction Date", class: "form-label" %>
+                                      <div class="mt-1">
+                                        <%= form.date_field :tran_date, max: Date.today, required: true, class: "text-field" %>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <%= form.label :category, class: "form-label" %>
+                                      <div class="mt-1">
+                                        <%= form.select :category_id, raw(grouped_category_options(Category.order(:group_title, :title))), { include_blank: true }, required: true, class: "text-field" %>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <%= form.label :amount, class: "form-label" %>
+                                      <div class="mt-1">
+                                        <%= form.number_field :amount, step: 0.01, required: true, class: "text-field" %>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <%= form.label :description, class: "form-label" %>
+                                      <div class="mt-1">
+                                        <%= form.text_field :description, required: true, class: "text-field" %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                                    <div class="flex items-center">
+                                      <%= form.radio_button :tran_type, "debit", checked: true, class: "relative size-4 appearance-none rounded-full border border-zinc-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-zinc-300 disabled:bg-zinc-100 disabled:before:bg-zinc-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
+                                      <label for="transaction_tran_type_debit" class="ml-3 form-label">Debit</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                      <%= form.radio_button :tran_type, "credit", class: "relative size-4 appearance-none rounded-full border border-zinc-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-zinc-300 disabled:bg-zinc-100 disabled:before:bg-zinc-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
+                                      <label for="transaction_tran_type_credit" class="ml-3 form-label">Credit</label>
+                                    </div>
+                                  </div>
+                                  <div class="pt-5 border-t border-zinc-200">
+                                    <div class="flex justify-end">
+                                      <%= form.submit "Save", class: "inline-flex justify-center btn-primary" %>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </el-dialog-panel>
+                    </div>
+                  </dialog>
+                </el-dialog>
+              </td>
+            </tr>
             <% @transactions.each do |tran| %>
               <tr>
                 <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-zinc-900 sm:pl-6"><%= word_date tran.tran_date %></td>
