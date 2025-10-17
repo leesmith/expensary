@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Accounts
   resources :accounts, except: [:destroy] do
-    resources :transactions, only: [:destroy], module: "accounts"
+    resources :transactions, only: [:create, :destroy], module: "accounts"
   end
 
   # Transactions

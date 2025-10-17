@@ -5,7 +5,7 @@ module ApplicationHelper
     date.blank? ? nil : date.in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y")
   end
 
-  def grouped_category_options(categories, selected_category_id)
+  def grouped_category_options(categories, selected_category_id = nil)
     optgroup = ""
     categories.map(&:group_title).uniq.each do |group|
       optgroup << "<optgroup label=\"#{group}\">"
