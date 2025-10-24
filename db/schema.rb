@@ -10,33 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_29_190302) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_24_034748) do
   create_table "accounts", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description"
     t.integer "account_type", default: 0, null: false
     t.decimal "balance", precision: 12, scale: 2
     t.datetime "created_at", null: false
+    t.string "description"
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_type"], name: "index_accounts_on_account_type"
   end
 
   create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "group_title", null: false
     t.string "title", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
     t.integer "account_id", null: false
+    t.decimal "amount", precision: 12, scale: 2, null: false
+    t.integer "category_id"
+    t.datetime "created_at", null: false
     t.text "description", null: false
     t.date "tran_date", null: false
     t.integer "tran_type", default: 0, null: false
-    t.decimal "amount", precision: 12, scale: 2, null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["tran_date"], name: "index_transactions_on_tran_date"
