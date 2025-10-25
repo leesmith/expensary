@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @transactions = @account.transactions.includes(:category).order(tran_date: :desc)
+    @categories = Category.order(:group_title, :title)
     @pagy, @transactions = pagy(@transactions, limit: 50)
   end
 
@@ -16,9 +17,6 @@ class AccountsController < ApplicationController
     else
       render :index, status: :unprocessable_content
     end
-  end
-
-  def edit
   end
 
   def update
