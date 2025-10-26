@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
   def create
     account = Account.new(account_params)
     if account.save
-      redirect_to accounts_url, success: "The account was successfully added."
+      redirect_to accounts_url, success: "The account was successfully added!"
     else
       render :index, status: :unprocessable_content
     end
