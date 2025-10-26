@@ -36,3 +36,5 @@ Category.find_or_create_by!(group_title: "Living", title: "Auto Maintenance")
 Category.find_or_create_by!(group_title: "Living", title: "Mortgage")
 Category.find_or_create_by!(group_title: "Living", title: "Doctor")
 Category.find_or_create_by!(group_title: "Living", title: "Pets")
+
+Category.find_or_create_by!(group_title: "Savings", title: "Emergency")
