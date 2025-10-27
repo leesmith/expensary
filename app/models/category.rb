@@ -3,5 +3,4 @@ class Category < ApplicationRecord
 
   scope :income, -> { where(group_title: "Income") }
   scope :expense, -> { where.not(group_title: "Income") }
-
 end
