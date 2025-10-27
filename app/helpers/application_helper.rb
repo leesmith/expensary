@@ -5,6 +5,16 @@ module ApplicationHelper
     date.blank? ? nil : date.in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y")
   end
 
+  def get_previous_month(date)
+    return (Date.today.beginning_of_month - 1.month).to_s if date.blank?
+    (date.beginning_of_month - 1.month).to_s
+  end
+
+  def get_next_month(date)
+    return (Date.today.beginning_of_month + 1.month).to_s if date.blank?
+    (date.beginning_of_month + 1.month).to_s
+  end
+
   def grouped_category_options(categories, selected_category_id = nil)
     optgroup = ""
     categories.map(&:group_title).uniq.each do |group|
