@@ -9,24 +9,24 @@
 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm bg-white" aria-label="Pagination">
   <%# Previous page link %>
   <% if pagy.prev %>
-    <%= a.(pagy.prev, '&larr;', classes: "relative inline-flex items-center rounded-l-md px-4 py-2 text-zinc-400 hover:text-sky-500 ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 focus:z-20 focus:outline-offset-0", aria_label: 'Previous').html_safe %>
+    <%= a.(pagy.prev, '&larr;', classes: "relative inline-flex items-center rounded-l-md px-4 py-2 text-stone-400 hover:text-sky-500 ring-1 ring-inset ring-stone-300 hover:bg-stone-50 focus:z-20 focus:outline-offset-0", aria_label: 'Previous').html_safe %>
   <% else %>
-    <a role="link" aria-disabled="true" aria-label="Previous" class="relative inline-flex items-center rounded-l-md px-4 py-2 text-zinc-400 ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 focus:z-20 focus:outline-offset-0">&larr;</a>
+    <a role="link" aria-disabled="true" aria-label="Previous" class="relative inline-flex items-center rounded-l-md px-4 py-2 text-stone-400 ring-1 ring-inset ring-stone-300 hover:bg-stone-50 focus:z-20 focus:outline-offset-0">&larr;</a>
   <% end %>
   <%# Page links (series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36]) %>
   <% pagy.series.each do |item| %>
     <% if item.is_a?(Integer) %>
-      <%= a.(item, classes: "relative inline-flex items-center px-4 py-2 text-sm font-medium text-zinc-700 hover:text-sky-500 ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 focus:z-20 focus:outline-offset-0").html_safe %>
+      <%= a.(item, classes: "relative inline-flex items-center px-4 py-2 text-sm font-medium text-stone-700 hover:text-sky-500 ring-1 ring-inset ring-stone-300 hover:bg-stone-50 focus:z-20 focus:outline-offset-0").html_safe %>
     <% elsif item.is_a?(String) %>
       <a role="link" aria-disabled="true" aria-current="page" class="relative inline-flex items-center px-4 py-2 text-sm font-medium z-10 bg-sky-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"><%= item %></a>
     <% elsif item == :gap %>
-      <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-zinc-700 ring-1 ring-inset ring-zinc-300 focus:outline-offset-0">...</span>
+      <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-stone-700 ring-1 ring-inset ring-stone-300 focus:outline-offset-0">...</span>
     <% end %>
   <% end %>
   <%# Next page link %>
   <% if pagy.next %>
-    <%= a.(pagy.next, "&rarr;", aria_label: 'Next', classes: "relative inline-flex items-center rounded-r-md px-4 py-2 text-zinc-400 hover:text-sky-500 ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 focus:z-20 focus:outline-offset-0").html_safe %>
+    <%= a.(pagy.next, "&rarr;", aria_label: 'Next', classes: "relative inline-flex items-center rounded-r-md px-4 py-2 text-stone-400 hover:text-sky-500 ring-1 ring-inset ring-stone-300 hover:bg-stone-50 focus:z-20 focus:outline-offset-0").html_safe %>
   <% else %>
-    <a role="link" aria-disabled="true" aria-label="Next" class="relative inline-flex items-center rounded-r-md px-4 py-2 text-zinc-400 ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 focus:z-20 focus:outline-offset-0">&rarr;</a>
+    <a role="link" aria-disabled="true" aria-label="Next" class="relative inline-flex items-center rounded-r-md px-4 py-2 text-stone-400 ring-1 ring-inset ring-stone-300 hover:bg-stone-50 focus:z-20 focus:outline-offset-0">&rarr;</a>
   <% end %>
 </nav>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full bg-zinc-100">
+<html class="h-full bg-[#f1f1ee]">
   <head>
     <title><%= content_for(:title) || "Expensary" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,10 +26,10 @@
   </head>
 
   <body class="h-full">
+    <!-- Drawer sidebar for mobile -->
     <el-dialog>
       <dialog id="sidebar" class="backdrop:bg-transparent lg:hidden">
-        <el-dialog-backdrop class="fixed inset-0 bg-zinc-800/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
-
+        <el-dialog-backdrop class="fixed inset-0 bg-stone-800/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
         <div tabindex="0" class="fixed inset-0 flex focus:outline-none">
           <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-64 flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
             <div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
@@ -38,11 +38,8 @@
                 <%= heroicon "x-mark", class: "size-6 text-white", data: { "slot" => "icon" } %>
               </button>
             </div>
-
-            <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-zinc-800 px-6 pb-2 ring-1 ring-white/10">
+            <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-stone-800 px-6 pb-2 ring-1 ring-white/10">
               <div class="relative flex h-16 shrink-0 items-center font-semibold font-serif text-xl text-emerald-600 tracking-wide">
-                <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
                 <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
                 Expensary
               </div>
@@ -51,14 +48,14 @@
                   <li>
                     <ul role="list" class="-mx-2 space-y-1">
                       <li>
-                        <!-- Current: "bg-white/5 text-white", Default: "text-zinc-400 hover:text-white hover:bg-white/5" -->
+                        <!-- Current: "bg-white/5 text-white", Default: "text-stone-400 hover:text-white hover:bg-white/5" -->
                         <% if request.controller_class.ancestors.include? DashboardController %>
                           <%= link_to root_path, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
                             <%= heroicon "building-library", class: "size-6 shrink-0" %>
                             Dashboard
                           <% end %>
                         <% else %>
-                          <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                          <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                             <%= heroicon "building-library", class: "size-6 shrink-0" %>
                             Dashboard
                           <% end %>
@@ -71,7 +68,7 @@
                             Accounts
                           <% end %>
                         <% else %>
-                          <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                          <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                             <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
                             Accounts
                           <% end %>
@@ -84,14 +81,14 @@
                             Transactions
                           <% end %>
                         <% else %>
-                          <%= link_to transactions_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                          <%= link_to transactions_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                             <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                             Transactions
                           <% end %>
                         <% end %>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                           Cash Flow
                         </a>
@@ -103,14 +100,14 @@
                             Categories
                           <% end %>
                         <% else %>
-                          <%= link_to categories_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                          <%= link_to categories_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                             <%= heroicon "tag", class: "size-6 shrink-0" %>
                             Categories
                           <% end %>
                         <% end %>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
+                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
                           <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                           Reports
                         </a>
@@ -126,11 +123,9 @@
     </el-dialog>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden bg-zinc-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
-      <!-- Sidebar component, swap this element with another sidebar if you like -->
+    <div class="hidden bg-stone-800 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
       <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6">
-        <div class="flex h-16 shrink-0 items-center font-semibold font-serif text-xl text-emerald-600 tracking-wide">
-          <%# <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" /> %>
+        <div class="flex h-16 shrink-0 items-center font-semibold font-serif text-xl text-emerald-600 tracking-wider">
           <%= heroicon "currency-dollar", class: "size-6 shrink-0 mr-1.5" %>
           Expensary
         </div>
@@ -139,14 +134,13 @@
             <li>
               <ul role="list" class="-mx-2 space-y-1">
                 <li>
-                  <!-- Current: "bg-white/5 text-white", Default: "text-zinc-400 hover:text-white hover:bg-white/5" -->
                   <% if request.controller_class.ancestors.include? DashboardController %>
                     <%= link_to root_path, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
                       <%= heroicon "building-library", class: "size-6 shrink-0" %>
                       Dashboard
                     <% end %>
                   <% else %>
-                    <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                    <%= link_to root_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                       <%= heroicon "building-library", class: "size-6 shrink-0" %>
                       Dashboard
                     <% end %>
@@ -159,7 +153,7 @@
                       Accounts
                     <% end %>
                   <% else %>
-                    <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                    <%= link_to accounts_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                       <%= heroicon "rectangle-stack", class: "size-6 shrink-0" %>
                       Accounts
                     <% end %>
@@ -172,14 +166,14 @@
                       Transactions
                     <% end %>
                   <% else %>
-                    <%= link_to transactions_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                    <%= link_to transactions_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                       <%= heroicon "banknotes", class: "size-6 shrink-0" %>
                       Transactions
                     <% end %>
                   <% end %>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-bar", class: "size-6 shrink-0" %>
                     Cash Flow
                   </a>
@@ -191,42 +185,31 @@
                       Categories
                     <% end %>
                   <% else %>
-                    <%= link_to categories_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white" do %>
+                    <%= link_to categories_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                       <%= heroicon "tag", class: "size-6 shrink-0" %>
                       Categories
                     <% end %>
                   <% end %>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-zinc-400 hover:bg-white/5 hover:text-white">
+                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
                     <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
                     Reports
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="-mx-6 mt-auto">
-              <%# <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-white/5"> %>
-              <%#   <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10" /> %>
-              <%#   <span class="sr-only">Your profile</span> %>
-              <%#   <span aria-hidden="true">Tom Cook</span> %>
-              <%# </a> %>
-            </li>
           </ul>
         </nav>
       </div>
     </div>
 
-    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-zinc-800 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-      <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-zinc-400 hover:text-white lg:hidden">
+    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-stone-800 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+      <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-stone-400 hover:text-white lg:hidden">
         <span class="sr-only">Open sidebar</span>
         <%= heroicon "bars-3", class: "size-6", data: { "slot" => "icon" } %>
       </button>
       <div class="flex-1 text-sm/6 font-semibold text-white">Dashboard</div>
-      <%# <a href="#"> %>
-      <%#   <span class="sr-only">Your profile</span> %>
-      <%#   <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10" /> %>
-      <%# </a> %>
     </div>
 
     <main class="py-10 lg:pl-64">
