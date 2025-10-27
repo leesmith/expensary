@@ -1,23 +1,23 @@
 <div class="flex justify-end mb-4">
   <span class="isolate inline-flex rounded-md shadow-xs">
-    <%= link_to "/?f=#{get_previous_month(@date_filter)}", class: "relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-zinc-400 inset-ring-1 inset-ring-zinc-300 hover:bg-zinc-50 hover:cursor-pointer focus:z-10" do %>
+    <%= link_to "/?f=#{get_previous_month(@date_filter)}", class: "relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="sr-only">Previous</span>
       <%= heroicon "chevron-left", class: "size-5", variant: :mini %>
     <% end %>
-    <span class="bg-white py-1 px-4 border-y-1 border-zinc-300 font-medium text-zinc-900 text-xs/7"><%= @date_filter.strftime("%b %Y") %></span>
-    <%= link_to "/?f=#{get_next_month(@date_filter)}", class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-zinc-400 inset-ring-1 inset-ring-zinc-300 hover:bg-zinc-50 hover:cursor-pointer focus:z-10" do %>
+    <span class="bg-white py-1 px-4 border-y-1 border-stone-300 font-medium text-stone-700 text-xs/7"><%= @date_filter.strftime("%b %Y") %></span>
+    <%= link_to "/?f=#{get_next_month(@date_filter)}", class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="sr-only">Next</span>
       <%= heroicon "chevron-right", class: "size-5", variant: :mini %>
     <% end %>
   </span>
 </div>
 
-<%= render "shared/card", class: "mb-5 grid grid-cols-1 divide-zinc-200 divide-y-1 md:grid-cols-3 md:divide-x md:divide-y-0" do %>
+<%= render "shared/card", class: "mb-5 grid grid-cols-1 divide-stone-200 divide-y-1 md:grid-cols-3 md:divide-x md:divide-y-0" do %>
   <div class="px-4 py-5 sm:p-6 text-center">
     <div class="font-semibold text-3xl text-green-700 py-3">
       <%= number_to_currency @total_income %>
     </div>
-    <div class="text-sm/6 font-medium tracking-widest text-zinc-500 uppercase">
+    <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Income
     </div>
   </div>
@@ -25,15 +25,15 @@
     <div class="font-semibold text-3xl text-red-700 py-3">
       <%= number_to_currency @total_expenses %>
     </div>
-    <div class="text-sm/6 font-medium tracking-widest text-zinc-500 uppercase">
+    <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Expenses
     </div>
   </div>
   <div class="px-4 py-5 sm:p-6 text-center">
-    <div class="font-semibold text-3xl text-zinc-900 py-3">
+    <div class="font-semibold text-3xl text-stone-900 py-3">
       <%= number_to_currency @total_net_income %>
     </div>
-    <div class="text-sm/6 font-medium tracking-widest text-zinc-500 uppercase">
+    <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Net Income
     </div>
   </div>
