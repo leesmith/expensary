@@ -13,7 +13,11 @@ class Accounts::TransactionsController < ApplicationController
   def update
     transaction = @account.transactions.find params.expect(:id)
     if transaction.update(transaction_params)
-      redirect_to @account, success: "The transaction was successfully updated!"
+      if params[:page].present?
+        redirect_to account_url(@account, page: params[:page])
+      else
+        redirect_to account_url(@account)
+      end
     else
       redirect_to @account, error: "The transaction could not be saved!"
     end
@@ -23,6 +27,12 @@ class Accounts::TransactionsController < ApplicationController
     transaction = @account.transactions.find(params.expect(:id))
     transaction.destroy
     redirect_to @account, success: "The transaction was successfully deleted!"
+  end
+
+  def edit_inline_category
+    @categories = Category.order(:group_title, :title)
+    @transaction = @account.transactions.find(params.expect(:id))
+    @page = params[:page]
   end
 
   private
