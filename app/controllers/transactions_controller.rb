@@ -8,9 +8,9 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params.expect(:id))
     if @transaction.update(transaction_params)
       if params[:page].present?
-      redirect_to transactions_url(page: params[:page])
+        redirect_to transactions_url(page: params[:page])
       else
-      redirect_to transactions_url
+        redirect_to transactions_url
       end
     else
       render :index, status: :unprocessable_content
