@@ -15,7 +15,7 @@
 <%= render "shared/card", class: "mb-5 grid grid-cols-1 divide-stone-200 divide-y-1 md:grid-cols-3 md:divide-x md:divide-y-0" do %>
   <div class="px-4 py-5 sm:p-6 text-center">
     <div class="font-semibold text-3xl text-green-700 py-3">
-      <%= number_to_currency @total_income %>
+      <%= number_to_currency(@total_income, precision: 0) %>
     </div>
     <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Income
@@ -23,7 +23,7 @@
   </div>
   <div class="px-4 py-5 sm:p-6 text-center">
     <div class="font-semibold text-3xl text-red-700 py-3">
-      <%= number_to_currency @total_expenses %>
+      <%= number_to_currency(@total_expenses, precision: 0) %>
     </div>
     <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Expenses
@@ -31,7 +31,7 @@
   </div>
   <div class="px-4 py-5 sm:p-6 text-center">
     <div class="font-semibold text-3xl text-stone-900 py-3">
-      <%= number_to_currency @total_net_income %>
+      <%= number_to_currency(@total_net_income, precision: 0) %>
     </div>
     <div class="text-xs/6 font-medium tracking-wider text-stone-500 uppercase">
       Total Net Income
