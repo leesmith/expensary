@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = @account.transactions.includes(:category).order(tran_date: :desc)
     @categories = Category.order(:group_title, :title)
-    @pagy, @transactions = pagy(@transactions, limit: 50)
+    @pagy, @transactions = pagy(@transactions, limit: 20)
   end
 
   def create
@@ -20,6 +20,12 @@ class AccountsController < ApplicationController
   end
 
   def update
+    @account = Account.find(params[:id])
+    if @account.update(account_params)
+      redirect_to account_url(@account), success: "The account was successfully updated!"
+    else
+      render :show, status: :unprocessable_content
+    end
   end
 
   private
