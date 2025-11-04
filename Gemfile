@@ -7,7 +7,7 @@ gem "bootsnap", require: false
 gem "csv"
 gem "importmap-rails"
 gem "jbuilder"
-gem "pagy"
+gem "pagy", "< 43"
 gem "propshaft"
 gem "puma"
 gem "rails"
