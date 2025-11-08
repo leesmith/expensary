@@ -22,10 +22,13 @@
         <div class="flex shrink-0 items-center gap-x-4">
           <div class="hidden sm:flex sm:flex-col sm:items-end">
             <% if account.liability_account_type? %>
-              <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span>
+              <p><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span></p>
             <% else %>
-              <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span>
+              <p><span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span></p>
             <% end %>
+            <p class="mt-2 text-xs/5 text-stone-500">
+              Latest transaction on <%= word_date account.latest_transaction&.tran_date %>
+            </p>
           </div>
           <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 flex-none text-stone-400">
             <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
