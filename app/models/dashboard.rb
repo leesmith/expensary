@@ -1,5 +1,5 @@
 class Dashboard
-  attr_accessor :total_income, :total_expenses, :cash_flow, :savings_rate
+  attr_accessor :total_income, :total_expenses, :cash_flow, :savings_rate, :top_expense_categories
 
   def initialize(date_filter)
     @date_filter = date_filter
@@ -7,6 +7,7 @@ class Dashboard
     @total_expenses = calc_total_expenses
     @cash_flow = calc_cash_flow
     @savings_rate = calc_savings_rate
+    @top_expense_categories = calc_top_expense_categories
   end
 
   def calc_total_income
@@ -55,5 +56,26 @@ class Dashboard
       AND transactions.tran_date <= '#{@date_filter.end_of_month}';
     SQL
     (Transaction.find_by_sql(total_savings_sql).first.total_savings / @total_income) * 100
+  end
+
+  def calc_top_expense_categories
+    return {} if @total_expenses < 1
+
+    top_expense_categories_sql = <<~SQL
+    SELECT
+      COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
+      COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense,
+      categories.title
+    FROM transactions
+    INNER JOIN categories ON transactions.category_id = categories.id
+    WHERE categories.group_title != 'Income'
+    AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
+    AND transactions.tran_date <= '#{@date_filter.end_of_month}'
+    GROUP BY categories.title
+    ORDER BY total_expense DESC, title
+    LIMIT 7;
+    SQL
+    result = Transaction.find_by_sql(top_expense_categories_sql)
+    result.map { |i| [i.title, i.total_expense] }.to_h
   end
 end
