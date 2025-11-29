@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "@tailwindplus/elements";
+import "echarts"
+import "echarts/theme/dark"

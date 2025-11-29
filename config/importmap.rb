@@ -12,3 +12,5 @@ pin "tailwindcss/colors", to: "tailwindcss--colors.js" # @4.1.12
 pin "tailwindcss/defaultTheme", to: "tailwindcss--defaultTheme.js" # @4.1.12
 pin "tailwindcss/plugin", to: "tailwindcss--plugin.js" # @4.1.12
 pin "el-transition" # @0.0.7
+pin "echarts", to: "echarts.min.js"
+pin "echarts/theme/dark", to: "echarts/theme/dark.js"
