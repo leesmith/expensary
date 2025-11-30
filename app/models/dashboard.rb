@@ -80,7 +80,7 @@ class Dashboard
     LIMIT 7;
     SQL
     result = Transaction.find_by_sql(top_expense_categories_sql)
-    result.map { |i| [i.title, i.total_expense.round(2)] }.to_h
+    result.map { |i| [ i.title, i.total_expense.round(2) ] }.to_h
   end
 
   def calc_uncategorized_trans
@@ -113,6 +113,6 @@ class Dashboard
     ORDER BY tran_date;
     SQL
     result = Transaction.find_by_sql(daily_expenses_sql)
-    result.map { |i| [i.tran_date.strftime("%b %d"), i.total_expense.round(2)] }.to_h
+    result.map { |i| [ i.tran_date.strftime("%b %d"), i.total_expense.round(2) ] }.to_h
   end
 end
