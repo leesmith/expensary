@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
     if account.save
       redirect_to accounts_url, success: "The account was successfully added!"
     else
-      render :index, status: :unprocessable_content
+      redirect_to accounts_url, error: "The account could not be added!"
     end
   end
 
@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
     if @account.update(account_params)
       redirect_to account_url(@account), success: "The account was successfully updated!"
     else
-      render :show, status: :unprocessable_content
+      redirect_to account_url(@account), error: "The account could not be updated!"
     end
   end
 

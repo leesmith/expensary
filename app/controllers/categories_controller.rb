@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     if category.save
       redirect_to categories_url, success: "The category was successfully added!"
     else
-      render :index, status: :unprocessable_content
+      redirect_to categories_url, error: "The category could not be added!"
     end
   end
 
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     if category.update(category_params)
       redirect_to categories_url, success: "The category was successfully updated!"
     else
-      redirect_to categories_url, error: "The category could not be saved!"
+      redirect_to categories_url, error: "The category could not be updated!"
     end
   end
 

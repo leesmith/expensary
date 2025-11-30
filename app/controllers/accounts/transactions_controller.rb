@@ -4,7 +4,7 @@ class Accounts::TransactionsController < ApplicationController
   def create
     transaction = @account.transactions.new(transaction_params)
     if transaction.save
-      redirect_to @account, success: "The transaction was successfully created!"
+      redirect_to @account, success: "The transaction was successfully added!"
     else
       redirect_to @account, error: "The transaction could not be saved!"
     end
@@ -13,13 +13,14 @@ class Accounts::TransactionsController < ApplicationController
   def update
     transaction = @account.transactions.find params.expect(:id)
     if transaction.update(transaction_params)
+      msg = "The transaction was successfully updated!"
       if params[:page].present?
-        redirect_to account_url(@account, page: params[:page])
+        redirect_to account_url(@account, page: params[:page]), success: msg
       else
-        redirect_to account_url(@account)
+        redirect_to account_url(@account), success: msg
       end
     else
-      redirect_to @account, error: "The transaction could not be saved!"
+      redirect_to @account, error: "The transaction could not be updated!"
     end
   end
 
