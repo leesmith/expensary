@@ -12,4 +12,9 @@ class CategoryTest < ActiveSupport::TestCase
   context "associations" do
     should have_many(:transactions).dependent(:nullify)
   end
+
+  context "validations" do
+    should validate_presence_of :group_title
+    should validate_presence_of :title
+  end
 end
