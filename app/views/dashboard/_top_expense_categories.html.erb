@@ -1,0 +1,44 @@
+<%# locals: (dashboard: nil) -%>
+<%= render "shared/card", class: "p-6" do %>
+  <p class="text-stone-900 font-medium text-center">Top Spending Categories</p>
+  <%= donut_chart dashboard.top_expense_categories,
+    height: "300px",
+    options: {
+      legend: {
+        show: false
+      },
+      series: {
+        name: "Top Expense Categories",
+        labelLine: {
+          show: true
+        },
+        padAngle: 4,
+        itemStyle: {
+          borderRadius: 8
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 4,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        },
+      },
+      color: [
+        "#ff6467",
+        "#ff8904",
+        "#fdc700",
+        "#05df72",
+        "#00bcff",
+        "#a684ff",
+        "#fb64b6",
+      ],
+    }
+  %>
+  <dl class="border-t border-stone-100">
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="text-sm/6 font-medium text-stone-900 whitespace-nowrap">Uncategorized Transactions</dt>
+      <dd class="mt-1 text-sm/6 text-stone-700 sm:col-span-2 sm:mt-0 text-right"><%= dashboard.uncatorgized_trans %></dd>
+    </div>
+  </dl>
+<% end %>
