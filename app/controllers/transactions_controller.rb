@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   def index
     @transactions = Transaction.includes(:account, :category).order(tran_date: :desc)
+    @categories = Category.order(:group_title, :title)
     @pagy, @transactions = pagy(@transactions, limit: 50)
   end
 
@@ -32,6 +33,6 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.expect(transaction: [ :category_id ])
+    params.expect(transaction: [ :tran_date, :description, :tran_type, :amount, :category_id ])
   end
 end
