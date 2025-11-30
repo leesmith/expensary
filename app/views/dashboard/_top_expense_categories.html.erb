@@ -1,6 +1,6 @@
 <%# locals: (dashboard: nil) -%>
 <%= render "shared/card", class: "p-6" do %>
-  <p class="text-stone-900 font-medium text-center">Top Spending Categories</p>
+  <p class="text-stone-900 font-medium text-center">Top Expense Categories</p>
   <%= donut_chart dashboard.top_expense_categories,
     height: "300px",
     options: {
