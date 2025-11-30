@@ -1,5 +1,6 @@
 class Dashboard
-  attr_accessor :total_income, :total_expenses, :cash_flow, :savings_rate, :top_expense_categories
+  attr_accessor :total_income, :total_expenses, :cash_flow, :savings_rate, :top_expense_categories,
+    :uncatorgized_trans, :daily_average_spending, :daily_expenses
 
   def initialize(date_filter)
     @date_filter = date_filter
@@ -8,6 +9,9 @@ class Dashboard
     @cash_flow = calc_cash_flow
     @savings_rate = calc_savings_rate
     @top_expense_categories = calc_top_expense_categories
+    @uncatorgized_trans = calc_uncategorized_trans
+    @daily_average_spending = calc_daily_average_spending
+    @daily_expenses = calc_daily_expenses
   end
 
   def calc_total_income
@@ -77,5 +81,38 @@ class Dashboard
     SQL
     result = Transaction.find_by_sql(top_expense_categories_sql)
     result.map { |i| [i.title, i.total_expense] }.to_h
+  end
+
+  def calc_uncategorized_trans
+    @uncatorgized_trans = Transaction.where(category_id: nil)
+      .where("tran_date BETWEEN ? AND ?", @date_filter.beginning_of_month, @date_filter.end_of_month)
+      .count
+  end
+
+  def calc_daily_average_spending
+    if Date.today.beginning_of_month == @date_filter
+      @total_expenses / Time.now.day
+    else
+      @total_expenses / Time.days_in_month(@date_filter.month)
+    end
+  end
+
+  def calc_daily_expenses
+    return {} if @total_expenses < 1
+
+    daily_expenses_sql = <<~SQL
+    SELECT tran_date,
+    COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
+    COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense
+    FROM transactions
+    INNER JOIN categories ON transactions.category_id = categories.id
+    WHERE categories.group_title != 'Income'
+    AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
+    AND transactions.tran_date <= '#{@date_filter.end_of_month}'
+    GROUP BY tran_date
+    ORDER BY tran_date;
+    SQL
+    result = Transaction.find_by_sql(daily_expenses_sql)
+    result.map { |i| [i.tran_date.to_s, i.total_expense.round(2)] }.to_h
   end
 end
