@@ -13,10 +13,8 @@
       },
     }
   %>
-  <dl class="border-t border-stone-100">
-    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-      <dt class="text-sm/6 font-medium text-stone-900 whitespace-nowrap">Daily Average Spending</dt>
-      <dd class="mt-1 text-sm/6 text-stone-700 sm:col-span-2 sm:mt-0 text-right"><%= number_to_currency(dashboard.daily_average_spending, precision: 2) %></dd>
-    </div>
-  </dl>
+  <div class="pt-5 flex items-center justify-between border-t border-stone-100">
+    <span class="text-sm/6 font-medium text-stone-900">Daily Average Spending</span>
+    <span class="text-sm/6 text-stone-700"><%= number_to_currency(dashboard.daily_average_spending, precision: 2) %></span>
+  </div>
 <% end %>
