@@ -23,7 +23,13 @@ class TransactionsController < ApplicationController
   def destroy
     transaction = Transaction.find(params[:id])
     transaction.destroy
-    redirect_to transactions_url, success: "The transaction was deleted!"
+    msg = "The transaction was successfully deleted!"
+    if request.referrer =~ /page=/
+      page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
+      redirect_to transactions_url(page: page), success: msg
+    else
+      redirect_to transactions_url, success: msg
+    end
   end
 
   def edit_inline_category
