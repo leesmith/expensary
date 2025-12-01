@@ -8,10 +8,12 @@ class TransactionsController < ApplicationController
   def update
     @transaction = Transaction.find(params.expect(:id))
     if @transaction.update(transaction_params)
-      if params[:page].present?
-        redirect_to transactions_url(page: params[:page])
+      msg = "The transaction was successfully updated!"
+      if request.referrer =~ /page=/
+        page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
+        redirect_to transactions_url(page: page), success: msg
       else
-        redirect_to transactions_url
+        redirect_to transactions_url, success: msg
       end
     else
       render :index, status: :unprocessable_content
@@ -27,7 +29,6 @@ class TransactionsController < ApplicationController
   def edit_inline_category
     @categories = Category.order(:group_title, :title)
     @transaction = Transaction.find(params.expect(:id))
-    @page = params[:page]
   end
 
   private

@@ -14,8 +14,9 @@ class Accounts::TransactionsController < ApplicationController
     transaction = @account.transactions.find params.expect(:id)
     if transaction.update(transaction_params)
       msg = "The transaction was successfully updated!"
-      if params[:page].present?
-        redirect_to account_url(@account, page: params[:page]), success: msg
+      if request.referrer =~ /page=/
+        page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
+        redirect_to account_url(@account, page: page), success: msg
       else
         redirect_to account_url(@account), success: msg
       end
@@ -33,7 +34,6 @@ class Accounts::TransactionsController < ApplicationController
   def edit_inline_category
     @categories = Category.order(:group_title, :title)
     @transaction = @account.transactions.find(params.expect(:id))
-    @page = params[:page]
   end
 
   private
