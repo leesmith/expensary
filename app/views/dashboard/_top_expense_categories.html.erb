@@ -37,6 +37,8 @@
   %>
   <div class="pt-5 flex items-center justify-between border-t border-stone-100">
     <span class="text-sm/6 font-medium text-stone-900">Uncategorized Transactions</span>
-    <span class="text-sm/6 text-stone-700"><%= dashboard.uncatorgized_trans %></span>
+    <span class="text-sm/6 <%= dashboard.uncatorgized_trans > 0 ? "text-red-700 font-medium" : "text-stone-900" %>">
+      <%= dashboard.uncatorgized_trans %>
+    </span>
   </div>
 <% end %>
