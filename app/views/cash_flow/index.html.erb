@@ -1,0 +1,35 @@
+<%= render "shared/card", class: "mb-5 p-6" do %>
+  <p class="text-stone-900 font-medium text-center">Monthly Cash Flow</p>
+  <%= custom_chart({
+    toolbox: {
+      show: false
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'category',
+      data: @cash_flow.map {|i| Date.strptime(i.month, "%Y-%m").strftime("%b %Y") }
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        type: "bar",
+        name: "Income",
+        data: @cash_flow.map {|i| i.total_income.round(2) }
+      },
+      {
+        type: "bar",
+        name: "Expenses",
+        data: @cash_flow.map {|i| i.total_expenses.round(2) }
+      }
+    ],
+    color: [
+      "#008236",
+      "#c10007",
+    ]
+  })
+%>
+<% end %>

@@ -26,4 +26,7 @@ Rails.application.routes.draw do
 
   # Categories
   resources :categories, only: [:index, :create, :update, :destroy]
+
+  # Cash flow
+  get "cashflow" => "cash_flow#index", as: :cash_flow
 end
