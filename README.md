@@ -1,5 +1,7 @@
 # Expensary - personal finance tracking
 
+<img width="2850" height="1590" alt="expensary" src="https://github.com/user-attachments/assets/b58f746d-15ef-47fe-88f1-67be14d409a2" />
+
 Expensary helps you measure and visualize your basic financial health. Track and categorize your
 spending in order to calculate your monthly [cash flow](https://www.experian.com/blogs/ask-experian/what-is-cash-flow/).
 Discover trends in spending to help change habits and promote higher savings and/or investing.
