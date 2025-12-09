@@ -1,4 +1,32 @@
 namespace :import do
+  desc "Bulk load Apple savings transactions"
+  task :apple_savings, [ :filepath ] => :environment do |t, args|
+    filepath = args[:filepath]
+    account = Account.find_by(name: "Apple Savings")
+    trans = []
+
+    CSV.foreach(filepath, headers: true) do |row|
+      # Transaction Date,Posted Date,Activity Type,Transaction Type,Description,Currency Code,Amount
+      # 10/31/2025,11/01/2025,"Interest","Credit","Interest Paid","USD","37.25"
+
+      if row[2] != "ACH"
+        category_id = Category.find_by(title: "Interest & Rewards").id
+
+        trans << ({
+          account_id: account.id,
+          category_id: category_id,
+          tran_date: Date.strptime(row[0], "%m/%d/%Y"),
+          description: row[4],
+          amount: row[6],
+          tran_type: row[3].downcase
+        })
+      end
+    end
+
+    Transaction.insert_all(trans)
+    puts "::::::::: Added #{trans.size} transactions!"
+  end
+
   desc "Bulk load Apple credit card transactions"
   task :apple, [ :filepath ] => :environment do |t, args|
     filepath = args[:filepath]
