@@ -20,7 +20,7 @@ class CashFlow
         END), 0) AS total_expenses
     FROM transactions
     INNER JOIN categories ON transactions.category_id = categories.id
-    WHERE transactions.tran_date >= '#{(Date.today - 12.months).beginning_of_month}'
+    WHERE transactions.tran_date >= '#{(Date.today - 18.months).beginning_of_month}'
     AND transactions.tran_date <= '#{Date.today.last_month.end_of_month}'
     AND transactions.category_id IS NOT NULL
     GROUP BY strftime('%Y-%m', transactions.tran_date)
