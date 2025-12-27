@@ -9,7 +9,7 @@
     },
     xAxis: {
       type: 'category',
-      data: @cash_flow.map {|i| Date.strptime(i.month, "%Y-%m").strftime("%b %Y") }
+      data: @cash_flow.map { |i| Date.strptime(i["month"], "%Y-%m").strftime("%b %Y") }
     },
     yAxis: {
       type: 'value'
@@ -18,12 +18,12 @@
       {
         type: "bar",
         name: "Income",
-        data: @cash_flow.map {|i| i.total_income.round(2) }
+        data: @cash_flow.map { |i| i["total_income"].round(2) }
       },
       {
         type: "bar",
         name: "Expenses",
-        data: @cash_flow.map {|i| i.total_expenses.round(2) }
+        data: @cash_flow.map { |i| i["total_expenses"].round(2) }
       }
     ],
     color: [

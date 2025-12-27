@@ -17,8 +17,8 @@ class Trends
       GROUP BY categories.title
       ORDER BY categories.title DESC
     SQL
-    result = Transaction.find_by_sql(spending_sql)
-    result.map { |i| [ i.title, i.total_expense.round(2) ] }.to_h
+    result = ActiveRecord::Base.connection.execute(spending_sql)
+    result.map { |i| [ i["title"], i["total_expense"].round(2) ] }.to_h
   end
 
   private

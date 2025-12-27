@@ -25,7 +25,7 @@ class Dashboard
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
-    Transaction.find_by_sql(total_income_sql).first.total_income
+    ActiveRecord::Base.connection.execute(total_income_sql).first["total_income"]
   end
 
   def calc_total_expenses
@@ -39,7 +39,7 @@ class Dashboard
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
-    Transaction.find_by_sql(total_expense_sql).first.total_expenses
+    ActiveRecord::Base.connection.execute(total_expense_sql).first["total_expenses"]
   end
 
   def calc_cash_flow
@@ -59,7 +59,7 @@ class Dashboard
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
-    (Transaction.find_by_sql(total_savings_sql).first.total_savings / @total_income) * 100
+    (ActiveRecord::Base.connection.execute(total_savings_sql).first["total_savings"] / @total_income) * 100
   end
 
   def calc_top_expense_categories
@@ -79,8 +79,8 @@ class Dashboard
       ORDER BY total_expense DESC, title
       LIMIT 7;
     SQL
-    result = Transaction.find_by_sql(top_expense_categories_sql)
-    result.map { |i| [ i.title, i.total_expense.round(2) ] }.to_h
+    result = ActiveRecord::Base.connection.execute(top_expense_categories_sql)
+    result.map { |i| [ i["title"], i["total_expense"].round(2) ] }
   end
 
   def calc_uncategorized_trans
@@ -112,7 +112,7 @@ class Dashboard
       GROUP BY tran_date
       ORDER BY tran_date;
     SQL
-    result = Transaction.find_by_sql(daily_expenses_sql)
-    result.map { |i| [ i.tran_date.strftime("%b %d"), i.total_expense.round(2) ] }.to_h
+    result = ActiveRecord::Base.connection.execute(daily_expenses_sql)
+    result.map { |i| [ i["tran_date"].to_date.strftime("%b %d"), i["total_expense"].round(2) ] }
   end
 end
