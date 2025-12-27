@@ -22,8 +22,8 @@ class Dashboard
       FROM transactions
       INNER JOIN categories ON transactions.category_id = categories.id
       WHERE categories.group_title = 'Income'
-      AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
-      AND transactions.tran_date <= '#{@date_filter.end_of_month}';
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
     Transaction.find_by_sql(total_income_sql).first.total_income
   end
@@ -36,8 +36,8 @@ class Dashboard
       FROM transactions
       INNER JOIN categories ON transactions.category_id = categories.id
       WHERE categories.group_title != 'Income'
-      AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
-      AND transactions.tran_date <= '#{@date_filter.end_of_month}';
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
     Transaction.find_by_sql(total_expense_sql).first.total_expenses
   end
@@ -56,8 +56,8 @@ class Dashboard
       FROM transactions
       INNER JOIN categories ON transactions.category_id = categories.id
       WHERE categories.group_title = 'Savings'
-      AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
-      AND transactions.tran_date <= '#{@date_filter.end_of_month}';
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])};
     SQL
     (Transaction.find_by_sql(total_savings_sql).first.total_savings / @total_income) * 100
   end
@@ -66,18 +66,18 @@ class Dashboard
     return {} if @total_expenses < 1
 
     top_expense_categories_sql = <<~SQL
-    SELECT
-      COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
-      COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense,
-      categories.title
-    FROM transactions
-    INNER JOIN categories ON transactions.category_id = categories.id
-    WHERE categories.group_title != 'Income'
-    AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
-    AND transactions.tran_date <= '#{@date_filter.end_of_month}'
-    GROUP BY categories.title
-    ORDER BY total_expense DESC, title
-    LIMIT 7;
+      SELECT
+        COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
+        COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense,
+        categories.title
+      FROM transactions
+      INNER JOIN categories ON transactions.category_id = categories.id
+      WHERE categories.group_title != 'Income'
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])}
+      GROUP BY categories.title
+      ORDER BY total_expense DESC, title
+      LIMIT 7;
     SQL
     result = Transaction.find_by_sql(top_expense_categories_sql)
     result.map { |i| [ i.title, i.total_expense.round(2) ] }.to_h
@@ -101,16 +101,16 @@ class Dashboard
     return {} if @total_expenses < 1
 
     daily_expenses_sql = <<~SQL
-    SELECT tran_date,
-    COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
-    COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense
-    FROM transactions
-    INNER JOIN categories ON transactions.category_id = categories.id
-    WHERE categories.group_title != 'Income'
-    AND transactions.tran_date >= '#{@date_filter.beginning_of_month}'
-    AND transactions.tran_date <= '#{@date_filter.end_of_month}'
-    GROUP BY tran_date
-    ORDER BY tran_date;
+      SELECT tran_date,
+        COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
+        COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense
+      FROM transactions
+      INNER JOIN categories ON transactions.category_id = categories.id
+      WHERE categories.group_title != 'Income'
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", @date_filter.beginning_of_month ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", @date_filter.end_of_month ])}
+      GROUP BY tran_date
+      ORDER BY tran_date;
     SQL
     result = Transaction.find_by_sql(daily_expenses_sql)
     result.map { |i| [ i.tran_date.strftime("%b %d"), i.total_expense.round(2) ] }.to_h
