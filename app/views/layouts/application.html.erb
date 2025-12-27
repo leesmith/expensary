@@ -114,10 +114,17 @@
                         <% end %>
                       </li>
                       <li>
-                        <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
-                          <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
-                          Reports
-                        </a>
+                        <% if request.controller_class.ancestors.include? TrendsController %>
+                          <%= link_to trends_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                            <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
+                            Trends
+                          <% end %>
+                        <% else %>
+                          <%= link_to trends_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
+                            <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
+                            Trends
+                          <% end %>
+                        <% end %>
                       </li>
                     </ul>
                   </li>
@@ -206,10 +213,17 @@
                   <% end %>
                 </li>
                 <li>
-                  <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white">
-                    <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
-                    Reports
-                  </a>
+                  <% if request.controller_class.ancestors.include? TrendsController %>
+                    <%= link_to trends_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
+                      <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
+                      Trends
+                    <% end %>
+                  <% else %>
+                    <%= link_to trends_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
+                      <%= heroicon "chart-pie", class: "size-6 shrink-0" %>
+                      Trends
+                    <% end %>
+                  <% end %>
                 </li>
               </ul>
             </li>

@@ -29,4 +29,7 @@ Rails.application.routes.draw do
 
   # Cash flow
   get "cashflow" => "cash_flow#index", as: :cash_flow
+
+  # Trends
+  get "trends" => "trends#index", as: :trends
 end
