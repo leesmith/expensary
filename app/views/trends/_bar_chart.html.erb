@@ -1,0 +1,36 @@
+<%# locals: (trends: nil) -%>
+<%= render "shared/card", class: "mb-5 p-6" do %>
+  <p class="text-stone-900 font-medium text-center">Spending By Category</p>
+  <p class="text-stone-500 text-xs/6 text-center"><%= trends_time_period_display(params[:f].present? ? params[:f] : "1") %></p>
+  <%= custom_chart({
+    height: '800px',
+    toolbox: {
+      show: false
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    xAxis: {
+      type: 'value'
+    },
+    yAxis: {
+      type: 'category',
+      data: trends.keys
+    },
+    series: [
+      {
+        type: "bar",
+        data: trends.values,
+        barWidth: '12px',
+        barGap: '100%'
+      }
+    ],
+    color: [
+      "#0084d1"
+    ]
+  })
+%>
+<% end %>

@@ -29,8 +29,12 @@ module ApplicationHelper
     optgroup
   end
 
-  def time_period_display(month_range)
-    month_range = month_range.to_i
-    word_date((Date.today - month_range.months).beginning_of_month) + " - " + word_date(Date.today.last_month.end_of_month)
+  def trends_time_period_display(month_range)
+    if month_range == "y"
+      word_date(Date.today.beginning_of_year) + " - " + word_date(Date.today)
+    else
+      month_range = month_range.to_i
+      word_date((Date.today - month_range.months).beginning_of_month) + " - " + word_date(Date.today.last_month.end_of_month)
+    end
   end
 end

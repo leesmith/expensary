@@ -9,8 +9,11 @@
     <%= link_to "/trends?f=6&g=#{params[:g]}", class: "relative -ml-px inline-flex items-center #{params[:f] == '6' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="px-2 font-medium text-stone-700 text-xs/5">6 months</span>
     <% end %>
-    <%= link_to "/trends?f=12&g=#{params[:g]}", class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:f] == '12' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
-      <span class="px-2 font-medium text-stone-700 text-xs/5">Year</span>
+    <%= link_to "/trends?f=12&g=#{params[:g]}", class: "relative -ml-px inline-flex items-center #{params[:f] == '6' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+      <span class="px-2 font-medium text-stone-700 text-xs/5">12 months</span>
+    <% end %>
+    <%= link_to "/trends?f=y&g=#{params[:g]}", class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:f] == 'y' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+      <span class="px-2 font-medium text-stone-700 text-xs/5">This year</span>
     <% end %>
   </div>
   <div class="isolate inline-flex rounded-md shadow-xs">
@@ -28,38 +31,6 @@
   </div>
 </div>
 
-<%= render "shared/card", class: "mb-5 p-6" do %>
-  <p class="text-stone-900 font-medium text-center">Spending By Category</p>
-  <p class="text-stone-500 text-xs/6 text-center"><%= time_period_display(params[:f].present? ? params[:f] : "1") %></p>
-  <%= custom_chart({
-    height: '800px',
-    toolbox: {
-      show: false
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    xAxis: {
-      type: 'value'
-    },
-    yAxis: {
-      type: 'category',
-      data: @trends.keys
-    },
-    series: [
-      {
-        type: "bar",
-        data: @trends.values,
-        barWidth: '12px',
-        barGap: '100%'
-      }
-    ],
-    color: [
-      "#0084d1"
-    ]
-  })
-%>
+<% if params[:g].blank? || params[:g] == 'b' %>
+  <%= render "bar_chart", trends: @trends %>
 <% end %>
