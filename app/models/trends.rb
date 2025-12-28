@@ -3,8 +3,8 @@ class Trends
     @month_range = month_range
   end
 
-  def calculate_spending_by_category
-    spending_sql = <<~SQL
+  def bar_chart_data
+    transactions_sql = <<~SQL
       SELECT
         COALESCE(SUM(CASE WHEN transactions.tran_type = 0 THEN transactions.amount ELSE 0 END), 0) -
         COALESCE(SUM(CASE WHEN transactions.tran_type = 1 THEN transactions.amount ELSE 0 END), 0) AS total_expense,
@@ -17,8 +17,39 @@ class Trends
       GROUP BY categories.title
       ORDER BY categories.title DESC
     SQL
-    result = ActiveRecord::Base.connection.execute(spending_sql)
+    result = ActiveRecord::Base.connection.execute(transactions_sql)
     result.map { |i| [ i["title"], i["total_expense"].round(2) ] }.to_h
+  end
+
+  def sankey_chart_data
+    transactions_sql = <<~SQL
+      SELECT
+        -- Income: credits minus debits for 'Income' category group
+        COALESCE(SUM(CASE
+          WHEN categories.group_title = 'Income' AND transactions.tran_type = 1
+          THEN transactions.amount
+          WHEN categories.group_title = 'Income' AND transactions.tran_type = 0
+          THEN -transactions.amount
+          ELSE 0
+          END), 0) AS total_income,
+        -- Expenses: debits minus credits for non-'Income' category groups
+        COALESCE(SUM(CASE
+          WHEN categories.group_title != 'Income' AND transactions.tran_type = 0
+          THEN transactions.amount
+          WHEN categories.group_title != 'Income' AND transactions.tran_type = 1
+          THEN -transactions.amount
+          ELSE 0
+          END), 0) AS total_expenses,
+        categories.title, categories.group_title
+      FROM transactions
+      INNER JOIN categories ON transactions.category_id = categories.id
+      WHERE transactions.category_id IS NOT NULL
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", start_date ])}
+      AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", end_date ])}
+      GROUP BY categories.group_title, categories.title
+      ORDER BY categories.group_title, categories.title DESC
+    SQL
+    result = ActiveRecord::Base.connection.execute(transactions_sql)
   end
 
   private

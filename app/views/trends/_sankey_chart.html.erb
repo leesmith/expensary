@@ -1,0 +1,20 @@
+<%# locals: (sankey_chart: nil) -%>
+<%= render "shared/card", class: "mb-5 p-6" do %>
+  <p class="text-stone-900 font-medium text-center">Income to Expenses</p>
+  <p class="text-stone-500 text-xs/6 text-center"><%= trends_time_period_display(params[:f].present? ? params[:f] : "1") %></p>
+  <%= custom_chart({
+    toolbox: {
+      show: false
+    },
+    series: {
+      type: 'sankey',
+      layout: 'none',
+      emphasis: {
+        focus: 'adjacency'
+      },
+      data: sankey_chart.data_set,
+      links: sankey_chart.links,
+    }
+  })
+%>
+<% end %>

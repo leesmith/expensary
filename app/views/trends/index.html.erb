@@ -33,4 +33,6 @@
 
 <% if params[:g].blank? || params[:g] == 'b' %>
   <%= render "bar_chart", trends: @trends %>
+<% elsif params[:g] == 's' %>
+  <%= render "sankey_chart", sankey_chart: @sankey_chart %>
 <% end %>
