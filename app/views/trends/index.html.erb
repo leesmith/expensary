@@ -19,7 +19,7 @@
   <div class="isolate inline-flex rounded-md shadow-xs">
     <%= link_to trends_url(f: params[:f], g: "b"), class: "relative inline-flex items-center rounded-l-md #{params[:g] == 'b' ? 'bg-stone-50' : params[:g] == nil ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="sr-only">Bar chart</span>
-      <%= heroicon "chart-bar", class: "size-5", variant: :mini %>
+      <%= heroicon "chart-bar", class: "size-5", variant: :solid %>
     <% end %>
     <%= link_to trends_url(f: params[:f], g: "s"), class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:g] == 's' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="sr-only">Sankey chart</span>
