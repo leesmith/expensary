@@ -6,14 +6,50 @@
     toolbox: {
       show: false
     },
+    tooltip: {
+      trigger: 'item',
+      triggerOn: 'mousemove'
+    },
     series: {
       type: 'sankey',
       layout: 'none',
       emphasis: {
         focus: 'adjacency'
       },
-      data: sankey_chart.data_set,
+      data: sankey_chart.nodes,
       links: sankey_chart.links,
+      levels: [
+        {
+          depth: 0,
+          itemStyle: {
+            color: '#ccebc5'
+          },
+          lineStyle: {
+            color: 'source',
+            opacity: 0.7
+          }
+        },
+        {
+          depth: 1,
+          itemStyle: {
+            color: '#dddddd'
+          },
+          lineStyle: {
+            color: 'source',
+            opacity: 0.7
+          }
+        },
+        {
+          depth: 2,
+          itemStyle: {
+            color: '#fbb4ae'
+          },
+          lineStyle: {
+            color: 'source',
+            opacity: 0.7
+          }
+        },
+      ]
     }
   })
 %>

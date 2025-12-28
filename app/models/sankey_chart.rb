@@ -38,6 +38,6 @@ class SankeyChart
   end
 
   def total_expense_for_group(expense_group_title)
-    @data.filter { |t| t["group_title"] == expense_group_title }.map { |t| t["total_expenses"] }.sum
+    @data.filter { |t| t["group_title"] == expense_group_title }.map { |t| t["total_expenses"] }.sum.round(2)
   end
 end
