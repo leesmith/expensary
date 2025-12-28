@@ -3,7 +3,7 @@ class SankeyChart
     @data = data
   end
 
-  def data_set
+  def nodes
     all_group_titles + income_titles
   end
 
