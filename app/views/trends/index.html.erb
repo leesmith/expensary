@@ -3,14 +3,10 @@
     <%= link_to trends_url(f: 1, g: params[:g]), class: "relative inline-flex items-center rounded-l-md #{params[:f] == '1' ? 'bg-stone-50' : params[:f] == nil ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="px-2 font-medium text-stone-700 text-xs/5">Last month</span>
     <% end %>
-    <%= link_to trends_url(f: 3, g: params[:g]), class: "relative -ml-px inline-flex items-center #{params[:f] == '3' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
-      <span class="px-2 font-medium text-stone-700 text-xs/5">3 months</span>
-    <% end %>
-    <%= link_to trends_url(f: 6, g: params[:g]), class: "relative -ml-px inline-flex items-center #{params[:f] == '6' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
-      <span class="px-2 font-medium text-stone-700 text-xs/5">6 months</span>
-    <% end %>
-    <%= link_to trends_url(f: 12, g: params[:g]), class: "relative -ml-px inline-flex items-center #{params[:f] == '12' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
-      <span class="px-2 font-medium text-stone-700 text-xs/5">12 months</span>
+    <% [3, 6, 12].each do |period| %>
+      <%= link_to trends_url(f: period, g: params[:g]), class: "relative -ml-px inline-flex items-center #{params[:f] == period.to_s ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+        <span class="px-2 font-medium text-stone-700 text-xs/5"><%= [period.to_s, "months"].join(" ") %></span>
+      <% end %>
     <% end %>
     <%= link_to trends_url(f: "y", g: params[:g]), class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:f] == 'y' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="px-2 font-medium text-stone-700 text-xs/5">This year</span>
