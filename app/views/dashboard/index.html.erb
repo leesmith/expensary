@@ -4,7 +4,7 @@
       <span class="sr-only">Previous</span>
       <%= heroicon "chevron-left", class: "size-5", variant: :mini %>
     <% end %>
-    <span class="bg-white py-1 px-4 border-y-1 border-stone-300 font-medium text-stone-700 text-xs/7"><%= @date_filter.strftime("%b %Y") %></span>
+    <span class="bg-white py-1 px-4 border-y-1 border-stone-300 font-medium text-stone-700 text-xs/7"><%= @date_filter.strftime("%B %Y") %></span>
     <%= link_to "/?f=#{get_next_month(@date_filter)}", class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="sr-only">Next</span>
       <%= heroicon "chevron-right", class: "size-5", variant: :mini %>
