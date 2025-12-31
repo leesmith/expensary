@@ -4,11 +4,11 @@ class SankeyChart
   end
 
   def nodes
-    all_group_titles + income_titles
+    all_group_titles + all_titles
   end
 
   def links
-    income_links + expense_links
+    income_links + group_expense_links + expense_links
   end
 
   private
@@ -17,8 +17,8 @@ class SankeyChart
     @data.map { |t| t["group_title"] }.uniq.map { |t| { name: t } }
   end
 
-  def income_titles
-    @data.filter { |t| t["group_title"] == "Income" }.map { |t| t["title"] }.uniq.map { |t| { name: t } }
+  def all_titles
+    @data.map { |t| t["title"] }.uniq.map { |t| { name: t } }
   end
 
   def income_links
@@ -27,9 +27,15 @@ class SankeyChart
     end
   end
 
-  def expense_links
+  def group_expense_links
     expense_group_titles.map do |group_title|
       { source: "Income", target: group_title, value: total_expense_for_group(group_title) }
+    end
+  end
+
+  def expense_links
+    @data.filter { |t| t["group_title"] != "Income" }.map do |expense_trans|
+      { source: expense_trans["group_title"], target: expense_trans["title"], value: expense_trans["total_expenses"].round(2) }
     end
   end
 

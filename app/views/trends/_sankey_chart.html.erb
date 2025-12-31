@@ -3,6 +3,7 @@
   <p class="text-stone-900 font-medium text-center">Income to Expenses</p>
   <p class="text-stone-500 text-xs/6 text-center"><%= trends_time_period_display(params[:f].present? ? params[:f] : "1") %></p>
   <%= custom_chart({
+    height: "850px",
     toolbox: {
       show: false
     },
@@ -43,6 +44,16 @@
           depth: 2,
           itemStyle: {
             color: '#fbb4ae'
+          },
+          lineStyle: {
+            color: 'source',
+            opacity: 0.7
+          }
+        },
+        {
+          depth: 3,
+          itemStyle: {
+            color: '#b3cde3'
           },
           lineStyle: {
             color: 'source',
