@@ -30,7 +30,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_equal categories_path, path
-    assert_equal "The category could not be added!", flash[:error]
+    assert_equal "The category could not be added: Group title can't be blank", flash[:error]
   end
 
   test "#update" do

@@ -17,4 +17,12 @@ class CategoryTest < ActiveSupport::TestCase
     should validate_presence_of :group_title
     should validate_presence_of :title
   end
+
+  test "unique title for group" do
+    create(:category, group_title: "Living", title: "Rent")
+    dupe = build(:category, group_title: "Living", title: "Rent")
+    refute dupe.valid?
+    dupe = build(:category, group_title: "Bills", title: "Rent")
+    assert dupe.valid?
+  end
 end

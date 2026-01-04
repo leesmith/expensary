@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     if category.save
       redirect_to categories_url, success: "The category was successfully added!"
     else
-      redirect_to categories_url, error: "The category could not be added!"
+      redirect_to categories_url, error: "The category could not be added: #{category.errors.full_messages.first}"
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_24_034748) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_04_195320) do
   create_table "accounts", force: :cascade do |t|
     t.integer "account_type", default: 0, null: false
     t.decimal "balance", precision: 12, scale: 2
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_24_034748) do
     t.string "group_title", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_title", "title"], name: "index_categories_on_group_title_and_title", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|
