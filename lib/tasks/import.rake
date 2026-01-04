@@ -46,7 +46,7 @@ namespace :import do
           account_id: account.id,
           tran_date: Date.strptime(row[0], "%m/%d/%Y"),
           description: row[3],
-          amount: row[6].gsub("-", ""),
+          amount: row[6].gsub("-", ""), # Amounts are always positive values
           tran_type: tran_type
         })
       end
@@ -118,7 +118,7 @@ namespace :import do
 
       unless row[7] == "PAYMENT - THANK YOU" # Ignore payments
         if row[5].present?
-          amount = row[5].gsub("-", "") # Amounts are always positive
+          amount = row[5].gsub("-", "") # Amounts are always positive values
           tran_type = "debit"
         else
           amount = row[6]
@@ -150,7 +150,7 @@ namespace :import do
       # "CHECKING * 3453","08/16/2024","08/16/2024","","Kroger","-20.0000","","Kroger"
 
       if row[5].present?
-        amount = row[5].gsub("-", "") # Amounts are always positive
+        amount = row[5].gsub("-", "") # Amounts are always positive values
         tran_type = "debit"
       else
         amount = row[6]
