@@ -1,14 +1,14 @@
 <div class="flex justify-end items-center space-x-4 mb-4">
   <div class="isolate inline-flex rounded-md shadow-xs">
-    <%= link_to cash_flow_url(f: 3), class: "relative inline-flex items-center rounded-l-md #{params[:f] == '3' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+    <%= link_to cash_flow_url(f: 3), class: "relative inline-flex items-center rounded-l-md #{params[:f] == '3' ? 'bg-stone-100' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="px-2 font-medium text-stone-700 text-xs/5">3 months</span>
     <% end %>
     <% [6, 12, 18].each do |period| %>
-      <%= link_to cash_flow_url(f: period), class: "relative -ml-px inline-flex items-center #{params[:f] == period.to_s ? 'bg-stone-50' : params[:f] == nil ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+      <%= link_to cash_flow_url(f: period), class: "relative -ml-px inline-flex items-center #{params[:f] == period.to_s ? 'bg-stone-100' : params[:f] == nil ? period == 6 ? 'bg-stone-100' : 'bg-white' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
         <span class="px-2 font-medium text-stone-700 text-xs/5"><%= [period, "months"].join(" ") %></span>
       <% end %>
     <% end %>
-    <%= link_to cash_flow_url(f: 24), class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:f] == '24' ? 'bg-stone-50' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
+    <%= link_to cash_flow_url(f: 24), class: "relative -ml-px inline-flex items-center rounded-r-md #{params[:f] == '24' ? 'bg-stone-100' : 'bg-white'} px-2 py-2 text-stone-400 inset-ring-1 inset-ring-stone-300 hover:bg-stone-50 hover:cursor-pointer focus:z-10" do %>
       <span class="px-2 font-medium text-stone-700 text-xs/5">24 months</span>
     <% end %>
   </div>
