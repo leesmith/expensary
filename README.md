@@ -2,6 +2,10 @@
 
 <img width="3552" height="1934" alt="exp-dashboard" src="https://github.com/user-attachments/assets/50a07958-5a7e-4a54-a177-883e29d49489" />
 
+<img width="3552" height="1934" alt="exp-cashflow" src="https://github.com/user-attachments/assets/ef14af13-4299-477c-8634-42cf2dbe7861" />
+
+<img width="3552" height="1934" alt="exp-trends1" src="https://github.com/user-attachments/assets/bbf1e125-ab29-4bf3-be4c-816dcd037477" />
+
 <img width="3552" height="1934" alt="exp-trends2" src="https://github.com/user-attachments/assets/13e4b4d5-f918-4d95-b679-f5750f170b28" />
 
 Expensary helps you measure and visualize your basic financial health. Categorize and track your
