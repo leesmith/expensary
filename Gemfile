@@ -35,7 +35,7 @@ end
 
 group :test do
   gem "capybara"
-  gem "minitest", "< 6"
+  gem "minitest", "< 7"
   gem "shoulda-context"
   gem "shoulda-matchers"
   gem "selenium-webdriver"
