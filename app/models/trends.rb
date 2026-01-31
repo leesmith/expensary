@@ -15,7 +15,7 @@ class Trends
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date >= ?", start_date ])}
       AND #{ActiveRecord::Base.sanitize_sql_array([ "transactions.tran_date <= ?", end_date ])}
       GROUP BY categories.title
-      ORDER BY categories.title DESC
+      ORDER BY total_expense ASC
     SQL
     result = ActiveRecord::Base.connection.execute(transactions_sql)
     result.map { |i| [ i["title"], i["total_expense"].round(2) ] }.to_h
