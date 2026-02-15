@@ -1,7 +1,17 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.includes(:account, :category).order(tran_date: :desc)
     @categories = Category.order(:group_title, :title)
+    @accounts = Account.order(:name)
+
+    @transactions = Transaction.includes(:account, :category)
+    if params[:category_id].present?
+      @transactions = @transactions.where(category_id: params[:category_id])
+    end
+    if params[:account_id].present?
+      @transactions = @transactions.where(account_id: params[:account_id])
+    end
+    @transactions = @transactions.order(tran_date: :desc)
+
     @pagy, @transactions = pagy(@transactions, limit: 50)
   end
 
