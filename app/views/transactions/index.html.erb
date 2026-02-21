@@ -2,10 +2,10 @@
   <%= form_with url: transactions_url, method: :get, class: "py-2" do |form| %>
     <div class="grid grid-cols-1 gap-y-3 gap-x-4 sm:grid-cols-12">
       <div class="sm:col-span-3">
-        <%= form.select :account_id, options_from_collection_for_select(@accounts, "id", "name", params[:account_id]), { prompt: "Filter by Account" }, onChange: "this.form.submit();", class: "text-field" %>
+        <%= form.select :account_id, options_from_collection_for_select(@accounts, "id", "name", params[:account_id]), { prompt: "-- Account --" }, onChange: "this.form.submit();", class: "text-field" %>
       </div>
       <div class="sm:col-span-3">
-        <%= form.select :category_id, raw(grouped_category_options(@categories, params[:category_id].to_i)), { prompt: "Filter by Category" }, onChange: "this.form.submit();", class: "text-field" %>
+        <%= form.select :category_id, raw(grouped_category_options(@categories, params[:category_id].to_i)), { prompt: "-- Category --" }, onChange: "this.form.submit();", class: "text-field" %>
       </div>
     </div>
   <% end %>
