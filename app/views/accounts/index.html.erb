@@ -5,42 +5,46 @@
       Add Account
     </button>
   </div>
-  <ul role="list" class="divide-y divide-stone-100 overflow-hidden bg-white shadow-sm ring-1 ring-stone-900/5 sm:rounded-lg">
-    <% @accounts.each do |account| %>
-      <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-stone-50 sm:px-6">
-        <div class="flex min-w-0 gap-x-4">
-          <div class="min-w-0 flex-auto">
-            <p class="text-md/6 font-semibold text-stone-900">
-              <%= link_to account do %>
-                <span class="absolute inset-x-0 -top-px bottom-0"></span>
-                <%= account.name %>
-              <% end %>
-            </p>
-            <p class="mt-1 flex text-xs/5 text-stone-500"><%= account.description %></p>
-          </div>
-        </div>
-        <div class="flex shrink-0 items-center gap-x-4">
-          <div class="hidden sm:flex sm:flex-col sm:items-end">
-            <% if account.liability_account_type? %>
-              <p><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span></p>
-            <% else %>
-              <p><span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span></p>
-            <% end %>
-            <p class="mt-2 text-xs/5 text-stone-500">
-              Latest transaction on <%= word_date account.latest_transaction&.tran_date %>
-            </p>
-          </div>
-          <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 flex-none text-stone-400">
-            <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-          </svg>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+  <div class="flex">
+    <div class="xl:w-2/3 w-full">
+      <ul role="list" class="divide-y divide-stone-100 overflow-hidden bg-white shadow-sm ring-1 ring-stone-900/5 sm:rounded-lg">
+        <% @accounts.each do |account| %>
+          <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-stone-50 sm:px-6">
+            <div class="flex min-w-0 gap-x-4">
+              <div class="min-w-0 flex-auto">
+                <p class="text-md/6 font-semibold text-stone-900">
+                  <%= link_to account do %>
+                    <span class="absolute inset-x-0 -top-px bottom-0"></span>
+                    <%= account.name %>
+                  <% end %>
+                </p>
+                <p class="mt-1 flex text-xs/5 text-stone-500"><%= account.description %></p>
+              </div>
+            </div>
+            <div class="flex shrink-0 items-center gap-x-4">
+              <div class="hidden sm:flex sm:flex-col sm:items-end">
+                <% if account.liability_account_type? %>
+                  <p><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span></p>
+                <% else %>
+                  <p><span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span></p>
+                <% end %>
+                <p class="mt-2 text-xs/5 text-stone-500">
+                  Latest transaction on <%= word_date account.latest_transaction&.tran_date %>
+                </p>
+              </div>
+              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 flex-none text-stone-400">
+                <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+              </svg>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 <% else %>
   <div class="flex justify-center">
     <div class="w-full xl:w-2/3 p-6 rounded-lg border-2 border-dashed border-stone-300 text-center">
-      <h3 class="mt-2 text-sm font-semibold text-gray-900">No accounts</h3>
+      <h3 class="mt-2 text-sm font-semibold text-stone-900">No accounts</h3>
       <p class="mt-1 text-sm text-stone-500">Add your liability and asset accounts in order to load transactions.</p>
       <div class="mt-6">
         <button command="show-modal" commandfor="new-account" class="gap-x-1.5 btn btn-primary">
