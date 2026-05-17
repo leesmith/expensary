@@ -30,13 +30,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_144018) do
   end
 
   create_table "category_rules", force: :cascade do |t|
-    t.integer "account_id"
     t.decimal "amount"
+    t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.string "description"
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_category_rules_on_account_id"
+    t.index ["category_id"], name: "index_category_rules_on_category_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -54,7 +54,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_144018) do
     t.index ["tran_type"], name: "index_transactions_on_tran_type"
   end
 
-  add_foreign_key "category_rules", "accounts"
+  add_foreign_key "category_rules", "categories"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
 end

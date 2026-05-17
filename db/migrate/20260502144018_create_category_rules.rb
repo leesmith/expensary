@@ -4,7 +4,7 @@ class CreateCategoryRules < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.string :description
       t.decimal :amount
-      t.references :account, foreign_key: true
+      t.references :category, foreign_key: true, null: false
       t.timestamps
     end
   end

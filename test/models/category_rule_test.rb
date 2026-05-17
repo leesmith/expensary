@@ -14,6 +14,6 @@ class CategoryRuleTest < ActiveSupport::TestCase
   end
 
   context "associations" do
-    should belong_to(:account).optional
+    should belong_to(:category)
   end
 end

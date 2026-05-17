@@ -1,5 +1,4 @@
 class CategoryRule < ApplicationRecord
-  belongs_to :account, optional: true
-
+  belongs_to :category
   validates :name, presence: true
 end

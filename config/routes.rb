@@ -32,4 +32,7 @@ Rails.application.routes.draw do
 
   # Trends
   get "trends" => "trends#index", as: :trends
+
+  # Category Rules
+  resources :category_rules, only: [:index]
 end
