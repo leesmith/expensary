@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="flex">
-    <div class="xl:w-2/3 w-full">
+    <div class="xl:w-3/4 w-full">
       <ul role="list" class="divide-y divide-stone-100 overflow-hidden bg-white shadow-sm ring-1 ring-stone-900/5 sm:rounded-lg">
         <% @accounts.each do |account| %>
           <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-stone-50 sm:px-6">
@@ -40,6 +40,13 @@
         <% end %>
       </ul>
     </div>
+    <div class="xl:w-1/4 px-6 text-stone-600">
+      <p class="pb-1 border-b border-stone-300 font-medium">Accounts</p>
+      <p class="pt-2 leading-6 text-sm">
+        Add your accounts by giving them a name and a brief description. Specify whether they are a
+        liability account (ex. credit card) or an asset account (ex. savings account).
+      </p>
+    </div>
   </div>
 <% else %>
   <div class="flex justify-center">
@@ -55,60 +62,5 @@
     </div>
   </div>
 <% end %>
-<el-dialog>
-  <dialog id="new-account" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
-    <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
-    <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
-      <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
-        <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
-          <div class="px-4 sm:px-6">
-            <div class="flex items-start justify-between">
-              <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Add Account</h2>
-              <div class="ml-3 flex h-7 items-center">
-                <button type="button" command="close" commandfor="new-account" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
-                  <span class="absolute -inset-2.5"></span>
-                  <span class="sr-only">Close panel</span>
-                  <%= heroicon "x-mark", class: "size-6" %>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="relative mt-6 flex-1 px-4 sm:px-6">
-            <div>
-              <%= form_with model: Account.new, url: accounts_path, method: :post, class: "my-4 space-y-4" do |form| %>
-                <div class="mt-2">
-                  <%= form.label :name, class: "form-label mr-2" %>
-                  <div class="mt-1">
-                    <%= form.text_field :name, required: true, class: "text-field" %>
-                  </div>
-                </div>
-                <div class="mt-2">
-                  <%= form.label :description, class: "form-label mr-2" %>
-                  <div class="mt-1">
-                    <%= form.text_field :description, class: "text-field" %>
-                  </div>
-                </div>
-                <fieldset>
-                  <legend class="text-sm/6 font-semibold text-stone-900">Account Type</legend>
-                  <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                    <% Account.account_types.each do |account_type| %>
-                      <div class="flex items-center">
-                        <%= form.radio_button :account_type, account_type.first, class: "relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
-                        <label class="form-label ml-3" for="account_account_type_<%= account_type.first %>"><%= account_type.first.titleize %></label>
-                      </div>
-                    <% end %>
-                  </div>
-                </fieldset>
-                <div class="pt-5 border-t border-stone-200">
-                  <div class="flex justify-end">
-                    <%= form.submit "Save", class: "btn btn-primary" %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </el-dialog-panel>
-    </div>
-  </dialog>
-</el-dialog>
+
+<%= render "add_account" %>

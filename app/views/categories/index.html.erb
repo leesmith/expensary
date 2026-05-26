@@ -7,7 +7,7 @@
   </div>
 
   <div class="flex">
-    <div class="xl:w-2/3 w-full">
+    <div class="xl:w-3/4 w-full">
       <%= render "shared/card" do %>
         <ul role="list" class="divide-y divide-stone-200">
           <% @categories.map(&:group_title).uniq.each do |group| %>
@@ -27,10 +27,10 @@
                 </div>
                 <div class="flex gap-x-2">
                   <div class="flex justify-end items-center text-right invisible group-hover/action:visible">
-                    <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer pr-4">
+                    <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer pr-4" title="Edit">
                       <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
                     </button>
-                    <button command="show-modal" commandfor="delete_<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm">
+                    <button command="show-modal" commandfor="delete_<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm" title="Delete">
                       <%= heroicon "trash", class: "size-6 shrink-0" %>
                     </button>
                   </div>
@@ -42,6 +42,13 @@
           <% end %>
         </ul>
       <% end %>
+    </div>
+    <div class="xl:w-1/4 px-6 text-stone-600">
+      <p class="pb-1 border-b border-stone-300 font-medium">Categories</p>
+      <p class="pt-2 leading-6 text-sm">
+        In order to track expenses, all transactions must be categorized. Add your categories by
+        giving them a title and assigning them to a group.
+      </p>
     </div>
   </div>
 <% else %>
