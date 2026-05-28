@@ -82,7 +82,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Run Herb Linter
-        run: npx @herb-tools/linter
+        run: npx @herb-tools/linter --format=simple
 
   test:
     name: Tests
