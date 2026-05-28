@@ -23,11 +23,13 @@
             </div>
             <div class="flex shrink-0 items-center gap-x-4">
               <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <% if account.liability_account_type? %>
-                  <p><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span></p>
-                <% else %>
-                  <p><span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span></p>
-                <% end %>
+                <p>
+                  <% if account.liability_account_type? %>
+                    <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">Liability</span>
+                  <% else %>
+                    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">Asset</span>
+                  <% end %>
+                </p>
                 <p class="mt-2 text-xs/5 text-stone-500">
                   Latest transaction on <%= word_date account.latest_transaction&.tran_date %>
                 </p>
