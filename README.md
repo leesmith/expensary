@@ -59,3 +59,5 @@ Run the test suite: `./bin/test`
 Run the CI suite: `./bin/ci`
 
 Load fake data to test drive the app: `./bin/rake fake`
+
+Install [herb linter](https://herb-tools.dev/): `npm install -g @herb-tools/linter`
