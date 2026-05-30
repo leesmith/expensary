@@ -1,8 +1,6 @@
 <div class="flex justify-between items-center mb-4">
-  <%= render "shared/breadcrumbs", current: @account.name, links: [
-    [ "Accounts", accounts_url ],
-  ] %>
-  <div class="">
+  <%= render "shared/breadcrumbs", current: @account.name, links: [ [ "Accounts", accounts_url ], ] %>
+  <div>
     <button command="show-modal" commandfor="edit-account" class="gap-x-1.5 btn btn-primary">
       <%= heroicon "pencil-square", class: "-ml-0.5 size-5", variant: :outline %>
       Edit Account
