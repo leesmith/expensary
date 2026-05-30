@@ -6,14 +6,14 @@
       Edit Account
     </button>
     <el-dialog>
-      <dialog id="edit-account" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+      <dialog id="edit-account" aria-labelledby="edit-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
         <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
         <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
           <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
             <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
-                  <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Edit Account</h2>
+                  <h2 id="edit-drawer-title" class="text-base font-semibold text-stone-900">Edit Account</h2>
                   <div class="ml-3 flex h-7 items-center">
                     <button type="button" command="close" commandfor="edit-account" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                       <span class="absolute -inset-2.5"></span>
@@ -91,14 +91,14 @@
                   </button>
                 </div>
                 <el-dialog>
-                  <dialog id="new-transaction" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+                  <dialog id="new-transaction" aria-labelledby="new-transaction-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
                     <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
                     <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
                       <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
                         <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                           <div class="px-4 sm:px-6">
                             <div class="flex items-start justify-between">
-                              <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Add Transaction</h2>
+                              <h2 id="new-transaction-drawer-title" class="text-base font-semibold text-stone-900">Add Transaction</h2>
                               <div class="ml-3 flex h-7 items-center">
                                 <button type="button" command="close" commandfor="new-transaction" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                   <span class="absolute -inset-2.5"></span>
@@ -191,14 +191,14 @@
                     </button>
                   </div>
                   <el-dialog>
-                    <dialog id="edit_<%= dom_id(tran) %>" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+                    <dialog id="edit_<%= dom_id(tran) %>" aria-labelledby="edit-tran-<%= tran.id %>-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
                       <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
                       <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
                         <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
                           <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                             <div class="px-4 sm:px-6">
                               <div class="flex items-start justify-between">
-                                <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Edit Transaction</h2>
+                                <h2 id="edit-tran-<%= tran.id %>-drawer-title" class="text-base font-semibold text-stone-900">Edit Transaction</h2>
                                 <div class="ml-3 flex h-7 items-center">
                                   <button type="button" command="close" commandfor="edit_<%= dom_id(tran) %>" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                     <span class="absolute -inset-2.5"></span>
