@@ -122,7 +122,7 @@
                                     <div>
                                       <%= form.label :category, class: "form-label" %>
                                       <div class="mt-1">
-                                        <%= form.select :category_id, raw(grouped_category_options(@categories)), { include_blank: true }, required: true, class: "text-field" %>
+                                        <%= form.select :category_id, grouped_options_for_select(@categories.group_by(&:group_title).transform_values { |cats| cats.map { |c| [c.title, c.id] } }), { include_blank: true }, required: true, class: "text-field" %>
                                       </div>
                                     </div>
                                     <div>
@@ -222,7 +222,7 @@
                                       <div>
                                         <%= form.label :category, class: "form-label" %>
                                         <div class="mt-1">
-                                          <%= form.select :category_id, raw(grouped_category_options(@categories, tran.category_id)), { include_blank: true }, required: true, class: "text-field" %>
+                                          <%= form.select :category_id, grouped_options_for_select(@categories.group_by(&:group_title).transform_values { |cats| cats.map { |c| [c.title, c.id] } }, tran.category_id), { include_blank: true }, required: true, class: "text-field" %>
                                         </div>
                                       </div>
                                       <div>
