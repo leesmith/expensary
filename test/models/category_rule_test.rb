@@ -10,7 +10,9 @@ class CategoryRuleTest < ActiveSupport::TestCase
   end
 
   context "validations" do
-    should validate_presence_of :name
+    should validate_presence_of :amount
+    should validate_presence_of :description
+    should validate_presence_of :amount_operator
   end
 
   context "associations" do

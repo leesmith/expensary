@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :category_rule do
     category
-    name { "Groceries" }
+    description { "Groceries" }
+    amount { 50.0 }
   end
 end

@@ -30,11 +30,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_144018) do
   end
 
   create_table "category_rules", force: :cascade do |t|
-    t.decimal "amount"
+    t.decimal "amount", precision: 12, scale: 2
+    t.string "amount_operator", default: "eq", null: false
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
-    t.string "description"
-    t.string "name", null: false
+    t.string "description", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_category_rules_on_category_id"
   end
