@@ -26,7 +26,7 @@ module ApplicationHelper
     if category_rule.amount.blank?
       "Any amount"
     else
-      [CategoryRule::OPERATORS[category_rule.amount_operator], number_to_currency(category_rule.amount)].join(" to ")
+      [ CategoryRule::OPERATORS[category_rule.amount_operator], number_to_currency(category_rule.amount) ].join(" to ")
     end
   end
 end

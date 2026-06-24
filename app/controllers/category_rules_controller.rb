@@ -1,5 +1,4 @@
 class CategoryRulesController < ApplicationController
-
   def create
     category = Category.find params.expect(:category_id)
     category_rule = category.category_rules.new(category_rule_params)
