@@ -6,36 +6,97 @@
     </button>
   </div>
 
-  <div class="flex">
-    <div class="xl:w-3/4 w-full">
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
+    <div class="xl:col-span-3">
       <%= render "shared/card" do %>
         <ul role="list" class="divide-y divide-stone-200">
           <% @categories.map(&:group_title).uniq.each do |group| %>
             <li class="flex justify-between gap-x-6 py-3 bg-sky-600">
               <div class="flex min-w-0 gap-x-4">
                 <div class="min-w-0 flex-auto">
-                  <p class="pl-4 text-md/6 font-semibold text-white"><%= group %></p>
+                  <p class="pl-4 text-base/6 font-semibold text-white"><%= group %></p>
                 </div>
               </div>
             </li>
             <% @categories.select {|c| c.group_title == group}.each do |category| %>
-              <li class="flex justify-between gap-x-6 py-3 bg-white group/action hover:bg-stone-50">
-                <div class="flex min-w-0 gap-x-4">
-                  <div class="min-w-0 flex-auto">
-                    <p class="pl-6 text-sm/6 text-stone-900"><%= category.title %></p>
+              <li data-controller="visibility">
+                <div class="flex justify-between gap-x-6 py-3 bg-white group/action">
+                  <div class="flex min-w-0 gap-x-4">
+                    <div class="min-w-0 flex-auto">
+                      <span class="pl-6 text-base/6 text-stone-900"><%= category.title %></span>
+                    </div>
+                  </div>
+                  <div class="flex gap-x-2">
+                    <div class="flex justify-end items-center text-right invisible group-hover/action:visible">
+                      <button data-action="visibility#toggleTargets" class="link-primary text-emerald-600 hover:text-emerald-700 hover:cursor-pointer pr-4" title="Category Rules">
+                        <%= heroicon "clipboard-document-list", class: "size-6 shrink-0" %>
+                      </button>
+                      <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer pr-4" title="Edit">
+                        <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
+                      </button>
+                      <button command="show-modal" commandfor="delete_<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm" title="Delete">
+                        <%= heroicon "trash", class: "size-6 shrink-0" %>
+                      </button>
+                    </div>
+                    <%= render "edit_category", category: category %>
+                    <%= render "delete_category", category: category %>
                   </div>
                 </div>
-                <div class="flex gap-x-2">
-                  <div class="flex justify-end items-center text-right invisible group-hover/action:visible">
-                    <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer pr-4" title="Edit">
-                      <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
-                    </button>
-                    <button command="show-modal" commandfor="delete_<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm" title="Delete">
-                      <%= heroicon "trash", class: "size-6 shrink-0" %>
-                    </button>
-                  </div>
-                  <%= render "edit_category", category: category %>
-                  <%= render "delete_category", category: category %>
+                <div class="hidden px-4 sm:px-6 lg:px-8" data-visibility-target="hideable">
+                  <% if category.category_rules.any? %>
+                    <div class="flex items-center">
+                      <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
+                      <div class="relative flex justify-center">
+                        <span class="whitespace-nowrap bg-white px-4 text-sm text-stone-600">Category Rules</span>
+                      </div>
+                      <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
+                    </div>
+                    <div class="my-6">
+                      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                          <table class="relative min-w-full divide-y divide-stone-100">
+                            <thead>
+                              <tr>
+                                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-stone-900 sm:pl-0">Description</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Amount</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Account</th>
+                                <th scope="col" class="py-3.5 pr-4 pl-3 sm:pr-0">
+                                  <span class="sr-only">Edit</span>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200">
+                              <% category.category_rules.each do |cr| %>
+                                <tr>
+                                  <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-stone-900 sm:pl-0"><%= cr.description %></td>
+                                  <td class="px-3 py-4 text-sm whitespace-nowrap text-stone-500"><%= category_rule_amount_display(cr) %></td>
+                                  <td class="px-3 py-4 text-sm whitespace-nowrap text-stone-500"><%= cr.account&.name %></td>
+                                  <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
+                                    <a href="#" class="link-primary">Edit</a>
+                                    <%= render "category_rules/edit_category_rule", category: category %>
+                                  </td>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="flex justify-center">
+                      <div class="w-full xl:w-2/3 p-6 my-6 rounded-lg border-2 border-dashed border-stone-300 text-center">
+                        <h3 class="mt-2 font-semibold text-stone-900">No category rules</h3>
+                        <p class="mt-1 text-sm text-stone-500">Add the first category rule for this category.</p>
+                        <div class="mt-6">
+                          <button command="show-modal" commandfor="new-category-rule-<%= dom_id(category) %>" class="gap-x-1.5 btn btn-primary">
+                            <%= heroicon "plus", class: "-ml-0.5 size-5", variant: :mini %>
+                            Add Category Rule
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <%= render "category_rules/new_category_rule", category: category, accounts: @accounts %>
+                  <% end %>
                 </div>
               </li>
             <% end %>
@@ -43,19 +104,29 @@
         </ul>
       <% end %>
     </div>
-    <div class="xl:w-1/4 px-6 text-stone-600">
-      <p class="pb-1 border-b border-stone-300 font-medium">Categories</p>
-      <p class="pt-2 leading-6 text-sm">
-        In order to track expenses, all transactions must be categorized. Add your categories by
-        giving them a title and assigning them to a group.
-      </p>
+    <div class="text-stone-600 space-y-8">
+      <div>
+        <p class="pb-1 border-b border-stone-300 font-medium">Categories</p>
+        <p class="pt-2 leading-6 text-sm">
+          In order to track expenses, all transactions must be categorized. Add your categories by
+          giving them a title and assigning them to a group.
+        </p>
+      </div>
+      <div>
+        <p class="pb-1 border-b border-stone-300 font-medium">Category Rules</p>
+        <p class="pt-2 leading-6 text-sm">
+          Create category rules so that transactions can be auto-assigned to a category based on certain criteria.
+        </p>
+      </div>
     </div>
   </div>
 <% else %>
   <div class="flex justify-center">
     <div class="w-full xl:w-2/3 p-6 rounded-lg border-2 border-dashed border-stone-300 text-center">
       <h3 class="mt-2 text-sm font-semibold text-stone-900">No categories</h3>
-      <p class="mt-1 text-sm text-stone-500">Add your categories so that income and expense transactions can be tracked.</p>
+      <p class="mt-1 text-sm text-stone-500">
+        Add your categories so that income and expense transactions can be tracked.
+      </p>
       <div class="mt-6">
         <button command="show-modal" commandfor="new-category" class="gap-x-1.5 btn btn-primary">
           <%= heroicon "plus", class: "-ml-0.5 size-5", variant: :mini %>

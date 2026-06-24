@@ -21,4 +21,12 @@ module ApplicationHelper
       word_date((Date.today - month_range.months).beginning_of_month) + " - " + word_date(Date.today.last_month.end_of_month)
     end
   end
+
+  def category_rule_amount_display(category_rule)
+    if category_rule.amount.blank?
+      "Any amount"
+    else
+      [CategoryRule::OPERATORS[category_rule.amount_operator], number_to_currency(category_rule.amount)].join(" to ")
+    end
+  end
 end

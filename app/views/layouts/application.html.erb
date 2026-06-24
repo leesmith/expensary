@@ -126,19 +126,6 @@
                           <% end %>
                         <% end %>
                       </li>
-                      <li>
-                        <% if request.controller_class.ancestors.include? CategoryRulesController %>
-                          <%= link_to category_rules_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
-                            <%= heroicon "clipboard-document-check", class: "size-6 shrink-0" %>
-                            Rules
-                          <% end %>
-                        <% else %>
-                          <%= link_to category_rules_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
-                            <%= heroicon "clipboard-document-check", class: "size-6 shrink-0" %>
-                            Rules
-                          <% end %>
-                        <% end %>
-                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -235,19 +222,6 @@
                     <%= link_to trends_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
                       <%= heroicon "arrow-trending-up", class: "size-6 shrink-0" %>
                       Trends
-                    <% end %>
-                  <% end %>
-                </li>
-                <li>
-                  <% if request.controller_class.ancestors.include? CategoryRulesController %>
-                    <%= link_to category_rules_url, class: "group flex gap-x-3 rounded-md bg-white/5 p-2 text-sm/6 text-white" do %>
-                      <%= heroicon "clipboard-document-list", class: "size-6 shrink-0" %>
-                      Rules
-                    <% end %>
-                  <% else %>
-                    <%= link_to category_rules_url, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 text-stone-400 hover:bg-white/5 hover:text-white" do %>
-                      <%= heroicon "clipboard-document-list", class: "size-6 shrink-0" %>
-                      Rules
                     <% end %>
                   <% end %>
                 </li>

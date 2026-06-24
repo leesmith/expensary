@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @account = Account.find(params[:id])
+    @account = Account.find params.expect(:id)
     @transactions = @account.transactions.includes(:category).order(tran_date: :desc)
     @categories = Category.order(:group_title, :title)
     @pagy, @transactions = pagy(@transactions, limit: 20)
@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
   end
 
   def update
-    @account = Account.find(params[:id])
+    @account = Account.find params.expect(:id)
     if @account.update(account_params)
       redirect_to account_url(@account), success: "The account was successfully updated!"
     else

@@ -1,0 +1,58 @@
+<el-dialog>
+  <dialog id="new-category-rule" aria-labelledby="new-category-rule-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+    <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
+    <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
+      <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
+        <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
+          <div class="px-4 sm:px-6">
+            <div class="flex items-start justify-between">
+              <h2 id="new-category-rule-drawer-title" class="text-base font-semibold text-stone-900">Add Category Rule</h2>
+              <div class="ml-3 flex h-7 items-center">
+                <button type="button" command="close" commandfor="new-category-rule" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                  <span class="absolute -inset-2.5"></span>
+                  <span class="sr-only">Close panel</span>
+                  <%= heroicon "x-mark", class: "size-6" %>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="relative mt-6 flex-1 px-4 sm:px-6">
+            <div>
+              <%= form_with model: CategoryRule.new, url: category_category_rules_path(category), class: "my-4 space-y-4" do |form| %>
+                <%= hidden_field :category_id, category.id %>
+                <div class="mt-2">
+                  <%= form.label :description, class: "form-label mr-2" %>
+                  <div class="mt-1">
+                    <%= form.text_field :description, required: true, class: "text-field" %>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <%= form.label :amount, class: "form-label mr-2" %>
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                    <div class="mt-1">
+                      <%= form.select :amount_operator, CategoryRule::OPERATORS.collect { |k,v| [ v, k ] }, {}, class: "text-field" %>
+                    </div>
+                    <div class="mt-1">
+                      <%= form.number_field :amount, step: 0.01, class: "text-field" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <%= form.label :account_id, class: "form-label mr-2" %>
+                  <div class="mt-1">
+                    <%= form.select :account_id, options_from_collection_for_select(Account.all.order(:name), "id", "name", nil), { include_blank: true }, { class: "text-field" } %>
+                  </div>
+                </div>
+                <div class="pt-5 border-t border-stone-200">
+                  <div class="flex justify-end">
+                    <%= form.submit "Save", class: "btn btn-primary" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>

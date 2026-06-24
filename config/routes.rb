@@ -25,14 +25,13 @@ Rails.application.routes.draw do
   end
 
   # Categories
-  resources :categories, only: [:index, :create, :update, :destroy]
+  resources :categories, only: [:index, :create, :update, :destroy] do
+    resources :category_rules, only: [:create, :update, :destroy]
+  end
 
   # Cash flow
   get "cashflow" => "cash_flow#index", as: :cash_flow
 
   # Trends
   get "trends" => "trends#index", as: :trends
-
-  # Category Rules
-  resources :category_rules, only: [:index]
 end

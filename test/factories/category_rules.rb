@@ -3,5 +3,6 @@ FactoryBot.define do
     category
     description { "Groceries" }
     amount { 50.0 }
+    amount_operator { "eq" }
   end
 end

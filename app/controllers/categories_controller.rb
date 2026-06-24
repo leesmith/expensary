@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.order(:group_title, :title)
+    @accounts = Account.all.order(:name)
+    @categories = Category.includes(:category_rules).order(:group_title, :title)
   end
 
   def create
