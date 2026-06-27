@@ -10,7 +10,8 @@ class CategoryRulesController < ApplicationController
   end
 
   def update
-    category_rule = Category.find params.expect(:id)
+    category = Category.find params.expect(:category_id)
+    category_rule = category.category_rules.find params.expect(:id)
     if category_rule.update(category_rule_params)
       redirect_to categories_url, success: "The category rule was successfully updated!"
     else

@@ -1,0 +1,39 @@
+<% form_url = category_rule.persisted? ? category_category_rule_path(category, category_rule) : category_category_rules_path(category) %>
+<%= form_with model: category_rule, url: form_url, class: "my-4 space-y-4" do |form| %>
+  <%= hidden_field :category_id, category.id %>
+  <div class="mb-4 flex items-center">
+    <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
+    <div class="relative flex justify-center">
+      <span class="bg-white px-2 text-sm font-medium text-stone-500"><%= category.title %></span>
+    </div>
+    <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
+  </div>
+  <div class="mt-2">
+    <%= form.label :description, class: "form-label mr-2" %>
+    <div class="mt-1">
+      <%= form.text_field :description, required: true, class: "text-field" %>
+    </div>
+  </div>
+  <div class="mt-2">
+    <%= form.label :amount, class: "form-label mr-2" %>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <div class="mt-1">
+        <%= form.select :amount_operator, CategoryRule::OPERATORS.collect { |k,v| [ v, k ] }, {}, class: "text-field" %>
+      </div>
+      <div class="mt-1">
+        <%= form.number_field :amount, step: 0.01, class: "text-field" %>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <%= form.label :account_id, class: "form-label mr-2" %>
+    <div class="mt-1">
+      <%= form.select :account_id, options_from_collection_for_select(accounts, "id", "name", category_rule.account_id), { include_blank: true }, { class: "text-field" } %>
+    </div>
+  </div>
+  <div class="pt-5 border-t border-stone-200">
+    <div class="flex justify-end">
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
