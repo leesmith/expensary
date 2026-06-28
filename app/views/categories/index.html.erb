@@ -26,15 +26,15 @@
                       <span class="pl-6 text-base/6 font-medium text-stone-900"><%= category.title %></span>
                     </div>
                   </div>
-                  <div class="flex gap-x-2">
-                    <div class="flex justify-end items-center text-right invisible group-hover/action:visible">
-                      <button data-action="visibility#toggleTargets" class="link-primary text-emerald-600 hover:text-emerald-700 hover:cursor-pointer pr-4" title="Category Rules">
+                  <div class="mr-4">
+                    <div class="flex justify-end items-center text-right invisible space-x-4 group-hover/action:visible">
+                      <button data-action="visibility#toggleTargets" class="link-primary text-emerald-600 hover:text-emerald-700 hover:cursor-pointer" title="Category Rules">
                         <%= heroicon "clipboard-document-list", class: "size-6 shrink-0" %>
                       </button>
-                      <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer pr-4" title="Edit">
+                      <button command="show-modal" commandfor="edit_<%= dom_id(category) %>" class="link-primary hover:cursor-pointer" title="Edit">
                         <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
                       </button>
-                      <button command="show-modal" commandfor="delete_<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm" title="Delete">
+                      <button command="show-modal" commandfor="delete-<%= dom_id(category) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer" title="Delete">
                         <%= heroicon "trash", class: "size-6 shrink-0" %>
                       </button>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="hidden px-4 sm:px-6 lg:px-8" data-visibility-target="hideable">
                   <% if category.category_rules.any? %>
                     <div class="relative flex items-center justify-between">
-                      <span class="bg-white pr-3 text-base text-stone-900 whitespace-nowrap">Category Rules</span>
+                      <span class="bg-white pr-3 text-sm text-stone-900 whitespace-nowrap">Category Rules</span>
                       <div class="flex w-full items-center">
                         <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
                         <button type="button" command="show-modal" commandfor="new-category-rule-<%= dom_id category %>" class="inline-flex items-center gap-x-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-medium whitespace-nowrap text-stone-900 shadow-xs inset-ring inset-ring-stone-300 hover:bg-stone-50">
@@ -54,7 +54,7 @@
                         </button>
                       </div>
                     </div>
-                    <div class="my-6">
+                    <div class="my-4">
                       <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                           <table class="relative min-w-full divide-y divide-stone-100">
@@ -64,7 +64,7 @@
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Amount</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Account</th>
                                 <th scope="col" class="py-3.5 pr-4 pl-3 sm:pr-0">
-                                  <span class="sr-only">Edit</span>
+                                  <span class="sr-only">Actions</span>
                                 </th>
                               </tr>
                             </thead>
@@ -74,10 +74,15 @@
                                   <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-stone-900 sm:pl-0"><%= cr.description %></td>
                                   <td class="px-3 py-4 text-sm whitespace-nowrap text-stone-500"><%= category_rule_amount_display(cr) %></td>
                                   <td class="px-3 py-4 text-sm whitespace-nowrap text-stone-500"><%= cr.account&.name %></td>
-                                  <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
-                                    <button command="show-modal" commandfor="edit-<%= dom_id cr %>" class="link-primary">
-                                      Edit
-                                    </button>
+                                  <td>
+                                    <div class="flex items-center justify-end space-x-4">
+                                      <button command="show-modal" commandfor="edit-<%= dom_id cr %>" class="link-primary hover:cursor-pointer" title="Edit">
+                                        <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
+                                      </button>
+                                      <button command="show-modal" commandfor="delete-<%= dom_id cr %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer" title="Delete">
+                                        <%= heroicon "trash", class: "size-6 shrink-0" %>
+                                      </button>
+                                    </div>
                                   </td>
                                 </tr>
                               <% end %>
@@ -103,6 +108,7 @@
                   <%= render "category_rules/new_category_rule", category: category, accounts: @accounts %>
                   <% category.category_rules.each do |cr| %>
                     <%= render "category_rules/edit_category_rule", category: category, category_rule: cr, accounts: @accounts %>
+                    <%= render "category_rules/delete_category_rule", category: category, category_rule: cr, accounts: @accounts %>
                   <% end %>
                 </div>
               </li>
