@@ -1,6 +1,5 @@
 <% form_url = category_rule.persisted? ? category_category_rule_path(category, category_rule) : category_category_rules_path(category) %>
 <%= form_with model: category_rule, url: form_url, class: "my-4 space-y-4" do |form| %>
-  <%= hidden_field :category_id, category.id %>
   <div class="mb-4 flex items-center">
     <div aria-hidden="true" class="w-full border-t border-stone-300"></div>
     <div class="relative flex justify-center">
