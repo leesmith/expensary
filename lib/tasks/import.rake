@@ -24,7 +24,10 @@ namespace :import do
       end
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -52,7 +55,10 @@ namespace :import do
       end
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -77,7 +83,10 @@ namespace :import do
       end
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -102,7 +111,10 @@ namespace :import do
       end
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -135,7 +147,10 @@ namespace :import do
       end
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 
@@ -166,7 +181,10 @@ namespace :import do
       })
     end
 
-    Transaction.insert_all(trans)
+    result = Transaction.insert_all(trans, returning: [ :id ])
+    Transaction.where(id: result.map { |r| r["id"] }).each do |transaction|
+      TransactionCategorizerService.new(transaction).call
+    end
     puts "::::::::: Added #{trans.size} transactions!"
   end
 end
