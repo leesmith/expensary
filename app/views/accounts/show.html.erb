@@ -25,36 +25,7 @@
               </div>
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
                 <div>
-                  <%= form_with model: @account, url: account_path(@account), class: "my-4 space-y-4" do |form| %>
-                    <div class="mt-2">
-                      <%= form.label :name, class: "form-label mr-2" %>
-                      <div class="mt-1">
-                        <%= form.text_field :name, required: true, class: "text-field" %>
-                      </div>
-                    </div>
-                    <div class="mt-2">
-                      <%= form.label :description, class: "form-label mr-2" %>
-                      <div class="mt-1">
-                        <%= form.text_field :description, class: "text-field" %>
-                      </div>
-                    </div>
-                    <fieldset>
-                      <legend class="text-sm/6 font-semibold text-stone-900">Account Type</legend>
-                      <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                        <% Account.account_types.each do |account_type| %>
-                          <div class="flex items-center">
-                            <%= form.radio_button :account_type, account_type.first, class: "relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
-                            <label class="form-label ml-3" for="account_account_type_<%= account_type.first %>"><%= account_type.first.titleize %></label>
-                          </div>
-                        <% end %>
-                      </div>
-                    </fieldset>
-                    <div class="pt-5 border-t border-stone-200">
-                      <div class="flex justify-end">
-                        <%= form.submit "Save", class: "btn btn-primary" %>
-                      </div>
-                    </div>
-                  <% end %>
+                  <%= render "form", account: @account %>
                 </div>
               </div>
             </div>
@@ -68,7 +39,7 @@
 <div class="flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <%= render "shared/card", class: "" do %>
+      <%= render "shared/card" do %>
         <table class="relative min-w-full divide-y divide-stone-300">
           <thead class="bg-stone-50">
             <tr>
