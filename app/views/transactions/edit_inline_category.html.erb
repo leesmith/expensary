@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @transaction do %>
   <%= form_with(model: @transaction, url: transaction_url, data: { controller: "inline-edit" }, class: "") do |form| %>
-    <%= form.select :category_id, raw(grouped_category_options(@categories, @transaction.category_id)), { include_blank: true }, class: "text-field", data: { inline_edit_target: "input", action: "change->inline-edit#submitForm blur->inline-edit#submitForm:prevent keydown.esc->inline-edit#submitForm:prevent" } %>
+    <%= form.select :category_id, grouped_options_for_select(@categories.group_by(&:group_title).transform_values { |cats| cats.map { |c| [c.title, c.id] } }, @transaction.category_id), { include_blank: true }, class: "text-field", data: { inline_edit_target: "input", action: "change->inline-edit#submitForm blur->inline-edit#submitForm:prevent keydown.esc->inline-edit#submitForm:prevent" } %>
   <% end %>
 <% end %>

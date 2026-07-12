@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   has_many :transactions, dependent: :nullify
+  has_many :category_rules, dependent: :destroy
 
   validates :group_title, :title, presence: true
   validates :title, presence: true,

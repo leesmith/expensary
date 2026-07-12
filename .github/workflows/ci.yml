@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  scan_ruby:
+  brakeman:
     name: Brakeman
     runs-on: ubuntu-latest
 
@@ -23,7 +23,7 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
-  scan_gems:
+  bundler_audit:
     name: Bundler audit
     runs-on: ubuntu-latest
 
@@ -40,7 +40,7 @@ jobs:
       - name: Bundler audit - security checks on gem dependencies
         run: bin/bundler-audit --update
 
-  scan_js:
+  importmap_audit:
     name: Importmap audit
     runs-on: ubuntu-latest
 
@@ -57,7 +57,7 @@ jobs:
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
-  lint:
+  rubocop:
     name: Rubocop
     runs-on: ubuntu-latest
 
@@ -73,6 +73,16 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
+
+  herb:
+    name: Herb Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Run herb linter
+        run: npx @herb-tools/linter
 
   test:
     name: Tests

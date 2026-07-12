@@ -11,6 +11,7 @@ class CategoryTest < ActiveSupport::TestCase
 
   context "associations" do
     should have_many(:transactions).dependent(:nullify)
+    should have_many(:category_rules).dependent(:destroy)
   end
 
   context "validations" do

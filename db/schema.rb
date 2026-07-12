@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_04_195320) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_144018) do
   create_table "accounts", force: :cascade do |t|
     t.integer "account_type", default: 0, null: false
     t.decimal "balance", precision: 12, scale: 2
@@ -29,6 +29,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_04_195320) do
     t.index ["group_title", "title"], name: "index_categories_on_group_title_and_title", unique: true
   end
 
+  create_table "category_rules", force: :cascade do |t|
+    t.integer "account_id"
+    t.decimal "amount", precision: 12, scale: 2
+    t.string "amount_operator", default: "eq", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.string "description", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_category_rules_on_account_id"
+    t.index ["category_id"], name: "index_category_rules_on_category_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.integer "account_id", null: false
     t.decimal "amount", precision: 12, scale: 2, null: false
@@ -44,6 +56,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_04_195320) do
     t.index ["tran_type"], name: "index_transactions_on_tran_type"
   end
 
+  add_foreign_key "category_rules", "accounts"
+  add_foreign_key "category_rules", "categories"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
 end

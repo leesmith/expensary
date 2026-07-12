@@ -1,21 +1,19 @@
 <div class="flex justify-between items-center mb-4">
-  <%= render "shared/breadcrumbs", current: @account.name, links: [
-    [ "Accounts", accounts_url ],
-  ] %>
-  <div class="">
+  <%= render "shared/breadcrumbs", current: @account.name, links: [ [ "Accounts", accounts_url ], ] %>
+  <div>
     <button command="show-modal" commandfor="edit-account" class="gap-x-1.5 btn btn-primary">
       <%= heroicon "pencil-square", class: "-ml-0.5 size-5", variant: :outline %>
       Edit Account
     </button>
     <el-dialog>
-      <dialog id="edit-account" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+      <dialog id="edit-account" aria-labelledby="edit-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
         <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
         <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
           <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
             <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
-                  <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Edit Account</h2>
+                  <h2 id="edit-drawer-title" class="text-base font-semibold text-stone-900">Edit Account</h2>
                   <div class="ml-3 flex h-7 items-center">
                     <button type="button" command="close" commandfor="edit-account" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                       <span class="absolute -inset-2.5"></span>
@@ -27,36 +25,7 @@
               </div>
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
                 <div>
-                  <%= form_with model: @account, url: account_path(@account), class: "my-4 space-y-4" do |form| %>
-                    <div class="mt-2">
-                      <%= form.label :name, class: "form-label mr-2" %>
-                      <div class="mt-1">
-                        <%= form.text_field :name, required: true, class: "text-field" %>
-                      </div>
-                    </div>
-                    <div class="mt-2">
-                      <%= form.label :description, class: "form-label mr-2" %>
-                      <div class="mt-1">
-                        <%= form.text_field :description, class: "text-field" %>
-                      </div>
-                    </div>
-                    <fieldset>
-                      <legend class="text-sm/6 font-semibold text-stone-900">Account Type</legend>
-                      <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                        <% Account.account_types.each do |account_type| %>
-                          <div class="flex items-center">
-                            <%= form.radio_button :account_type, account_type.first, class: "relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-sky-600 checked:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden" %>
-                            <label class="form-label ml-3" for="account_account_type_<%= account_type.first %>"><%= account_type.first.titleize %></label>
-                          </div>
-                        <% end %>
-                      </div>
-                    </fieldset>
-                    <div class="pt-5 border-t border-stone-200">
-                      <div class="flex justify-end">
-                        <%= form.submit "Save", class: "btn btn-primary" %>
-                      </div>
-                    </div>
-                  <% end %>
+                  <%= render "form", account: @account %>
                 </div>
               </div>
             </div>
@@ -70,7 +39,7 @@
 <div class="flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <%= render "shared/card", class: "" do %>
+      <%= render "shared/card" do %>
         <table class="relative min-w-full divide-y divide-stone-300">
           <thead class="bg-stone-50">
             <tr>
@@ -93,14 +62,14 @@
                   </button>
                 </div>
                 <el-dialog>
-                  <dialog id="new-transaction" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+                  <dialog id="new-transaction" aria-labelledby="new-transaction-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
                     <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
                     <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
                       <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
                         <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                           <div class="px-4 sm:px-6">
                             <div class="flex items-start justify-between">
-                              <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Add Transaction</h2>
+                              <h2 id="new-transaction-drawer-title" class="text-base font-semibold text-stone-900">Add Transaction</h2>
                               <div class="ml-3 flex h-7 items-center">
                                 <button type="button" command="close" commandfor="new-transaction" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                   <span class="absolute -inset-2.5"></span>
@@ -124,7 +93,7 @@
                                     <div>
                                       <%= form.label :category, class: "form-label" %>
                                       <div class="mt-1">
-                                        <%= form.select :category_id, raw(grouped_category_options(@categories)), { include_blank: true }, required: true, class: "text-field" %>
+                                        <%= form.select :category_id, grouped_options_for_select(@categories.group_by(&:group_title).transform_values { |cats| cats.map { |c| [c.title, c.id] } }), { include_blank: true }, required: true, class: "text-field" %>
                                       </div>
                                     </div>
                                     <div>
@@ -184,23 +153,23 @@
                 </td>
                 <td class="px-3 py-4 text-sm text-stone-500"><%= truncate(tran.description, length: 60) %></td>
                 <td class="py-4 pr-4 pl-3 sm:pr-6">
-                  <div class="flex justify-end items-center text-right invisible group-hover/action:visible">
-                    <button command="show-modal" commandfor="edit_<%= dom_id(tran) %>" class="link-primary hover:cursor-pointer pr-4">
+                  <div class="flex justify-end items-center text-right invisible space-x-4 group-hover/action:visible">
+                    <button command="show-modal" commandfor="edit_<%= dom_id(tran) %>" class="link-primary hover:cursor-pointer" title="Edit">
                       <%= heroicon "pencil-square", class: "size-6 shrink-0" %>
                     </button>
-                    <button command="show-modal" commandfor="delete_<%= dom_id(tran) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm">
+                    <button command="show-modal" commandfor="delete_<%= dom_id(tran) %>" class="link-primary text-red-700 hover:text-red-500 hover:cursor-pointer text-sm" title="Delete">
                       <%= heroicon "trash", class: "size-6 shrink-0" %>
                     </button>
                   </div>
                   <el-dialog>
-                    <dialog id="edit_<%= dom_id(tran) %>" aria-labelledby="drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
+                    <dialog id="edit_<%= dom_id(tran) %>" aria-labelledby="edit-tran-<%= tran.id %>-drawer-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-hidden bg-transparent not-open:hidden backdrop:bg-transparent">
                       <el-dialog-backdrop class="absolute inset-0 bg-stone-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"></el-dialog-backdrop>
                       <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
                         <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
                           <div class="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                             <div class="px-4 sm:px-6">
                               <div class="flex items-start justify-between">
-                                <h2 id="drawer-title" class="text-base font-semibold text-stone-900">Edit Transaction</h2>
+                                <h2 id="edit-tran-<%= tran.id %>-drawer-title" class="text-base font-semibold text-stone-900">Edit Transaction</h2>
                                 <div class="ml-3 flex h-7 items-center">
                                   <button type="button" command="close" commandfor="edit_<%= dom_id(tran) %>" class="relative p-1 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                     <span class="absolute -inset-2.5"></span>
@@ -224,7 +193,7 @@
                                       <div>
                                         <%= form.label :category, class: "form-label" %>
                                         <div class="mt-1">
-                                          <%= form.select :category_id, raw(grouped_category_options(@categories, tran.category_id)), { include_blank: true }, required: true, class: "text-field" %>
+                                          <%= form.select :category_id, grouped_options_for_select(@categories.group_by(&:group_title).transform_values { |cats| cats.map { |c| [c.title, c.id] } }, tran.category_id), { include_blank: true }, required: true, class: "text-field" %>
                                         </div>
                                       </div>
                                       <div>
