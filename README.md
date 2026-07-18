@@ -26,6 +26,14 @@ to track savings contributions. All other category groups are free to edit.
 
 Transactions *must* be categorized before they will apply to income or expense totals.
 
+### Category Rules
+
+Create category rules so that transactions can be automatically assigned a category upon import.
+Enter a transaction description phrase. This phrase will be compared to a transaction's description
+and will match if the phrase is contained in that transaction description. Enter an optional
+amount that can be equal to, less than or equal to, or greater than or equal to a transaction's
+amount. Lastly, optionally scope the category rule to transactions belonging to a certain account.
+
 ### Accounts
 
 Add your liability and asset accounts. Accounts like checking and savings would be considered asset
