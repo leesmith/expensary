@@ -37,7 +37,8 @@ end
 group :test do
   gem "capybara"
   gem "minitest"
+  gem "selenium-webdriver"
   gem "shoulda-context"
   gem "shoulda-matchers"
-  gem "selenium-webdriver"
+  gem "simplecov", require: false
 end
