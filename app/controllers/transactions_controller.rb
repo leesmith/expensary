@@ -18,28 +18,16 @@ class TransactionsController < ApplicationController
   def update
     @transaction = Transaction.find(params.expect(:id))
     if @transaction.update(transaction_params)
-      msg = "The transaction was successfully updated!"
-      if request.referrer =~ /page=/
-        page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
-        redirect_to transactions_url(page: page), success: msg
-      else
-        redirect_to transactions_url, success: msg
-      end
+      redirect_to transactions_url(page: referrer_page), success: "The transaction was successfully updated!"
     else
-      render :index, status: :unprocessable_content
+      redirect_to transactions_url(page: referrer_page), error: "The transaction could not be updated!"
     end
   end
 
   def destroy
     transaction = Transaction.find(params[:id])
     transaction.destroy
-    msg = "The transaction was successfully deleted!"
-    if request.referrer =~ /page=/
-      page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
-      redirect_to transactions_url(page: page), success: msg
-    else
-      redirect_to transactions_url, success: msg
-    end
+    redirect_to transactions_url(page: referrer_page), success: "The transaction was successfully deleted!"
   end
 
   def edit_inline_category
@@ -48,6 +36,10 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def referrer_page
+    request.referrer[/page=(\d+)/, 1] if request.referrer =~ /page=/
+  end
 
   def transaction_params
     params.expect(transaction: [ :tran_date, :description, :tran_type, :amount, :category_id ])

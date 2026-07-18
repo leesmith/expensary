@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TransactionsTest < ActionDispatch::IntegrationTest
+class Accounts::TransactionsTest < ActionDispatch::IntegrationTest
   def setup
     @account = create(:account, name: "Checking")
   end
@@ -56,5 +56,13 @@ class TransactionsTest < ActionDispatch::IntegrationTest
     assert_equal account_path(@account), path
     assert_equal "The transaction was successfully deleted!", flash[:success]
     assert_empty @account.transactions
+  end
+
+  test "#edit_inline_category" do
+    create(:category, title: "Mortgage")
+    transaction = create(:transaction, account: @account)
+    get edit_inline_category_account_transaction_url(@account, transaction)
+    assert_equal 1, @controller.instance_variable_get(:@categories).size
+    assert_equal transaction, @controller.instance_variable_get(:@transaction)
   end
 end

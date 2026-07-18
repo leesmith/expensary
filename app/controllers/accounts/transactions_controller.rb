@@ -13,28 +13,16 @@ class Accounts::TransactionsController < ApplicationController
   def update
     transaction = @account.transactions.find params.expect(:id)
     if transaction.update(transaction_params)
-      msg = "The transaction was successfully updated!"
-      if request.referrer =~ /page=/
-        page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
-        redirect_to account_url(@account, page: page), success: msg
-      else
-        redirect_to account_url(@account), success: msg
-      end
+      redirect_to account_url(@account, page: referrer_page), success: "The transaction was successfully updated!"
     else
-      redirect_to @account, error: "The transaction could not be updated!"
+      redirect_to account_url(@account, page: referrer_page), error: "The transaction could not be updated!"
     end
   end
 
   def destroy
     transaction = @account.transactions.find(params.expect(:id))
     transaction.destroy
-    msg = "The transaction was successfully deleted!"
-    if request.referrer =~ /page=/
-      page = request.referrer[request.referrer =~ /page=/..-1].split("=").last
-      redirect_to account_url(@account, page: page), success: msg
-    else
-      redirect_to account_url(@account), success: msg
-    end
+    redirect_to account_url(@account, page: referrer_page), success: "The transaction was successfully deleted!"
   end
 
   def edit_inline_category
@@ -46,6 +34,10 @@ class Accounts::TransactionsController < ApplicationController
 
   def set_account
     @account = Account.find params.expect(:account_id)
+  end
+
+  def referrer_page
+    request.referrer[/page=(\d+)/, 1] if request.referrer =~ /page=/
   end
 
   def transaction_params
