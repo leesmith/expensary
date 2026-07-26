@@ -52,7 +52,7 @@ for your CSV files. You'll need to change the lookups for accounts and categorie
 tasks to fit your data. Note that transactions like credit card payments should be ignored since they
 aren't part of your cash flow. However, a transfer to a savings account should be recorded and
 categorized as a savings contribution. Negative transaction amounts should be made positive and the
-`tran_type` should set as "debit".
+`tran_type` should be set as "debit".
 
 `./bin/rake import:apple["/path/to/csv_file.csv"]`
 
