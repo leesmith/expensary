@@ -19,6 +19,9 @@ FileUtils.chdir APP_ROOT do
   puts "== Running rubocop =="
   system! "bin/rubocop --fail-level A --format clang"
 
+  puts "== Running Archspec =="
+  system! "bin/archspec check"
+
   puts "== Running herb linter =="
   system! "bin/herb lint"
 

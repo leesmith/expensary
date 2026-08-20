@@ -20,6 +20,7 @@ gem "turbo-rails"
 
 group :development, :test do
   gem "amazing_print"
+  gem "archspec"
   gem "bundler-audit"
   gem "brakeman", require: false
   gem "factory_bot_rails"

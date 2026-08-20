@@ -40,6 +40,23 @@ jobs:
       - name: Bundler audit - security checks on gem dependencies
         run: bin/bundler-audit --update
 
+  archspec:
+    name: Archspec
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Archspec - Architecture specification
+        run: bin/archspec check
+
   importmap_audit:
     name: Importmap audit
     runs-on: ubuntu-latest
