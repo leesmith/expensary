@@ -78,7 +78,7 @@ GEM
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     amazing_print (2.0.0)
-    archspec (1.0.0)
+    archspec (1.0.1)
       prism (>= 1.0)
     ast (2.4.3)
     base64 (0.3.0)
