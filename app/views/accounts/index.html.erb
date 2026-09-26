@@ -14,7 +14,7 @@
             <div class="flex min-w-0 gap-x-4">
               <div class="min-w-0 flex-auto">
                 <p class="text-base/6 font-semibold text-stone-900">
-                  <%= link_to account do %>
+                  <%= link_to account_path(account) do %>
                     <span class="absolute inset-x-0 -top-px bottom-0"></span>
                     <%= account.name %>
                   <% end %>
@@ -67,4 +67,4 @@
   </div>
 <% end %>
 
-<%= render "new_account" %>
+<%= render "accounts/new_account" %>

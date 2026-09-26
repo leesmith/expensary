@@ -28,7 +28,7 @@
 </div>
 
 <% if params[:g].blank? || params[:g] == 'b' %>
-  <%= render "bar_chart", trends: @trends %>
+  <%= render "trends/bar_chart", trends: @trends %>
 <% elsif params[:g] == 's' %>
-  <%= render "sankey_chart", sankey_chart: @sankey_chart %>
+  <%= render "trends/sankey_chart", sankey_chart: @sankey_chart %>
 <% end %>

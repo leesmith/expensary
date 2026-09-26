@@ -11,12 +11,12 @@
 # GitHub Repo: https://github.com/marcoroth/herb
 #
 
-version: 0.10.3
+version: 0.11.0
 
 # # Framework and template engine configuration
 #
 # # Options: ruby | actionview | hanami | sinatra (default: ruby)
-# framework: ruby
+framework: actionview
 #
 # # Options: erubi | erb | herb (default: erubi)
 # template_engine: erubi
@@ -45,14 +45,27 @@ linter:
   # # Valid values: error (default), warning, info, hint
   # failLevel: warning
 
+  # # Only report diagnostics of this severity or higher
+  # # Affects the CLI output only: lower-severity offenses are still counted in the
+  # # summary and still show up in your editor, they just aren't printed or
+  # # annotated in CI. Valid values: error, warning, info, hint (default)
+  # logLevel: warning
+
   # # Additional patterns beyond the defaults for linting
   # include:
   #   - '**/*.xml.erb'
   #
   # # Patterns to exclude from linting
-  exclude:
-    - 'app/views/shared/_pagination.html.erb'
+  # exclude:
+  #   - 'app/views/admin/**/*'
+
   # rules:
+  #   # The 'all' pseudo rule sets the default for every rule you don't list.
+  #   #   false: start from an empty set and opt back in explicitly
+  #   #   true:  start from every rule, including the ones off by default
+  #   all:
+  #     enabled: false
+  #
   #   erb-no-extra-newline:
   #     enabled: false
   #
@@ -76,7 +89,9 @@ linter:
 formatter:
   enabled: false
   indentWidth: 2
+  indentStyle: space
   maxLineLength: 80
+
   # # Additional patterns beyond the defaults for formatting
   # include:
   #   - '**/*.xml.erb'

@@ -38,8 +38,8 @@
                         <%= heroicon "trash", class: "size-6 shrink-0" %>
                       </button>
                     </div>
-                    <%= render "edit_category", category: category %>
-                    <%= render "delete_category", category: category %>
+                    <%= render "categories/edit_category", category: category %>
+                    <%= render "categories/delete_category", category: category %>
                   </div>
                 </div>
                 <div class="hidden px-4 sm:px-6 lg:px-8" data-visibility-target="hideable">
@@ -154,4 +154,4 @@
   </div>
 <% end %>
 
-<%= render "new_category" %>
+<%= render "categories/new_category" %>
