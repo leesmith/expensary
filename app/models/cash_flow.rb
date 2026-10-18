@@ -1,6 +1,7 @@
 class CashFlow
-  def initialize(month_range)
+  def initialize(month_range, include_savings: true)
     @month_range = month_range.to_i
+    @include_savings = include_savings
   end
 
   def calculate_monthly_cash_flow
@@ -27,6 +28,7 @@ class CashFlow
       WHERE transactions.tran_date >= '#{(Date.today - @month_range.months).beginning_of_month}'
       AND transactions.tran_date <= '#{Date.today.last_month.end_of_month}'
       AND transactions.category_id IS NOT NULL
+      #{"AND categories.group_title != 'Savings'" unless @include_savings}
       GROUP BY strftime('%Y-%m', transactions.tran_date)
       ORDER BY month;
     SQL
