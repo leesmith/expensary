@@ -23,10 +23,10 @@ group :development, :test do
   gem "archspec"
   gem "bundler-audit"
   gem "brakeman", require: false
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "factory_bot_rails"
   gem "faker"
   gem "herb"
-  gem "pry"
   gem "rubocop-rails-omakase", require: false
 end
 
