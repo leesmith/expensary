@@ -1,5 +1,5 @@
 <%# locals: (dashboard: nil) -%>
-<%= render "shared/card", class: "p-6" do %>
+<%= render "application/card", class: "p-6" do %>
   <p class="text-stone-900 font-medium text-center">Daily Spending</p>
   <%= line_chart dashboard.daily_expenses,
     height: "300px",

@@ -12,7 +12,7 @@
   </span>
 </div>
 
-<%= render "shared/card", class: "mb-5 grid grid-cols-1 divide-stone-200 divide-y-1 md:grid-cols-4 md:divide-x md:divide-y-0" do %>
+<%= render "application/card", class: "mb-5 grid grid-cols-1 divide-stone-200 divide-y-1 md:grid-cols-4 md:divide-x md:divide-y-0" do %>
   <div class="px-4 py-5 sm:p-6 text-center">
     <div class="font-semibold text-3xl text-green-700 py-3">
       <%= number_to_currency(@dashboard.total_income, precision: 2) %>

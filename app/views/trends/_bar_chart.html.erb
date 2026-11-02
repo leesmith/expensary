@@ -1,5 +1,5 @@
 <%# locals: (trends: nil) -%>
-<%= render "shared/card", class: "mb-5 p-6" do %>
+<%= render "application/card", class: "mb-5 p-6" do %>
   <p class="text-stone-900 font-medium text-center">Spending By Category</p>
   <p class="text-stone-500 text-xs/6 text-center"><%= trends_time_period_display(params[:f].present? ? params[:f] : "1") %></p>
   <%= custom_chart({

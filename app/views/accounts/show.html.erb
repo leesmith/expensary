@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center mb-4">
-  <%= render "shared/breadcrumbs", current: @account.name, links: [ [ "Accounts", accounts_url ], ] %>
+  <%= render "application/breadcrumbs", current: @account.name, links: [ [ "Accounts", accounts_url ], ] %>
   <div>
     <button command="show-modal" commandfor="edit-account" class="gap-x-1.5 btn btn-primary">
       <%= heroicon "pencil-square", class: "-ml-0.5 size-5", variant: :outline %>
@@ -39,7 +39,7 @@
 <div class="flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <%= render "shared/card" do %>
+      <%= render "application/card" do %>
         <table class="relative min-w-full divide-y divide-stone-300">
           <thead class="bg-stone-50">
             <tr>
@@ -81,7 +81,7 @@
                           </div>
                           <div class="relative mt-6 flex-1 px-4 sm:px-6">
                             <div>
-                              <%= form_with(url: account_transactions_url(@account), scope: :transaction) do |form| %><%# herb:disable html-no-nested-forms %>
+                              <%= form_with(url: account_transactions_url(@account), scope: :transaction) do |form| %>
                                 <div class="space-y-8">
                                   <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4">
                                     <div>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="relative mt-6 flex-1 px-4 sm:px-6">
                               <div>
-                                <%= form_with(model: tran, url: account_transaction_url(@account, tran), scope: :transaction) do |form| %><%# herb:disable html-no-nested-forms %>
+                                <%= form_with(model: tran, url: account_transaction_url(@account, tran), scope: :transaction) do |form| %>
                                   <div class="space-y-8">
                                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4">
                                       <div>
@@ -271,6 +271,6 @@
 
 <div class="flex justify-end">
   <div class="my-4 text-sm font-medium text-sky-500 hover:text-sky-700">
-    <%== render partial: "shared/pagination", locals: { pagy: @pagy } %>
+    <%== render partial: "application/pagination", locals: { pagy: @pagy } %>
   </div>
 </div>
